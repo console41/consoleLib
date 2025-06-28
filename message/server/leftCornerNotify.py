@@ -4,7 +4,7 @@
 from ...constant.serverConstant import *
 
 
-def SendGlobalMessage(msg, header, color=ENUM.ColorCode.WHITE):
+def SendGlobalMessage(msg, header='', color=ENUM.ColorCode.WHITE):
     """
     聊天框发送一条消息
     (原SetServerMessage)
@@ -17,7 +17,7 @@ def SendGlobalMessage(msg, header, color=ENUM.ColorCode.WHITE):
     return GameComp.SetNotifyMsg(header + str(msg), color)
 
 
-def SendMessageToPlayer(pid, msg, header, color=ENUM.ColorCode.WHITE):
+def SendMessageToPlayer(pid, msg, header='', color=ENUM.ColorCode.WHITE):
     """
     给指定玩家发送消息
     (原SetClientMessage)
