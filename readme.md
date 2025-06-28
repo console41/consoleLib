@@ -119,6 +119,40 @@ print HaveItem(serverApi.GetPlayerList()[0], 'minecraft:diamond')
 
 ## message / 消息
 
+### SendLocalMessage
+
+客户端
+
+method in consoleLib.message.client.leftCornerNotify
+
+* 描述
+  
+  客户端发送一条消息
+
+ 参数
+  
+  | 参数名    | 数据类型 | 描述   | 默认值  |
+  |--------|------|------|------|
+  | msg    | str  | 消息内容 |      |
+  | header | str  | 消息头  | 空字符串 |
+  | color  | str  | 颜色   | 白色   |
+
+* 返回值
+  
+  | 数据类型 | 描述   |
+  | ---- | ---- |
+  | bool | 是否成功 |
+
+* 示例
+
+```python
+# -*- coding: utf-8 -*-
+from consoleLib.clientApi import SendLocalMessage
+
+SendGlobalMessage('游戏即将开始', header='系统>>')
+# 结果: 系统>>游戏即将开始
+```
+
 ### SendGlobalMessage
 
 服务端
@@ -129,12 +163,13 @@ method in consoleLib.message.server.leftCornerNotify
   
   聊天框发送一条消息
 
-* 参数
+ 参数
   
-  | 参数名   | 数据类型 | 描述   | 默认值 |
-  | ----- | ---- | ---- | --- |
-  | msg   | str  | 消息内容 |     |
-  | color | str  | 颜色   | 白色  |
+  | 参数名    | 数据类型 | 描述   | 默认值  |
+  |--------|------|------|------|
+  | msg    | str  | 消息内容 |      |
+  | header | str  | 消息头  | 空字符串 |
+  | color  | str  | 颜色   | 白色   |
 
 * 返回值
   
@@ -149,7 +184,7 @@ method in consoleLib.message.server.leftCornerNotify
 from consoleLib.constant.serverConstant import *
 from consoleLib.serverApi import SendGlobalMessage
 
-SendGlobalMessage('游戏即将开始', ENUM.ColorCode.MINECOIN_GOLD)
+SendGlobalMessage('游戏即将开始', color=ENUM.ColorCode.MINECOIN_GOLD)
 ```
 
 ### SendMessageToPlayer
@@ -168,6 +203,7 @@ method in consoleLib.message.server.leftCornerNotify
   | ----- | ---- | --------- | --- |
   | pid   | str  | 接收消息的玩家ID |     |
   | msg   | str  | 消息内容      |     |
+  | header | str  | 消息头  | 空字符串 |
   | color | str  | 颜色        | 白色  |
 
 * 返回值
@@ -181,7 +217,7 @@ method in consoleLib.message.server.leftCornerNotify
 from consoleLib.constant.serverConstant import *
 from consoleLib.serverApi import SendMessageToPlayer
 
-SendMessageToPlayer(serverApi.GetPlayerList()[0], 'example_sentence', ENUM.ColorCode.RED)
+SendMessageToPlayer(serverApi.GetPlayerList()[0], 'example_sentence', color=ENUM.ColorCode.RED)
 ```
 
 ## title / 标题
