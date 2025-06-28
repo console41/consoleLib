@@ -18,6 +18,9 @@
   * [playerId / 玩家ID](#playerid--玩家id)
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername)
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername-1)
+    * [IsIdPlayerId](#isidplayerid)
+      * [服务端](#服务端)
+      * [客户端](#客户端)
   * [time / 时间](#time--时间)
     * [GetCurrentTime](#getcurrenttime)
     * [GetDay](#getday)
@@ -30,6 +33,8 @@
     * [GetDistanceToSecondTargetPointFromPlayer](#getdistancetosecondtargetpointfromplayer)
       * [服务端接口](#服务端接口-2)
       * [客户端接口](#客户端接口-2)
+  * [command / 指令](#command--指令)
+    * [IsRunByPlayer](#isrunbyplayer)
 <!-- TOC -->
 
 ## constant
@@ -282,6 +287,66 @@ from consoleLib.serverApi import GetPlayerIdByUid
 print GetPlayerIdByUid(-12345678987654321)
 ```
 
+### IsIdPlayerId
+
+#### 服务端
+
+method in consoleLib.playerId.server.isPlayerId
+
+* 描述
+  
+  判断实体id是不是玩家id
+
+* 参数
+  
+  | 参数名 | 数据类型 | 描述   | 默认值 |
+  | --- |------|------| --- |
+  | eid | str  | 实体id |     |
+
+* 返回值
+  
+  | 数据类型 | 描述      |
+  |------|---------|
+  | bool | 是否是玩家id |
+
+* 示例
+
+```python
+# -*- coding: utf-8 -*-
+from consoleLib.serverApi import IsPlayerId
+
+print IsPlayerId(114514)
+```
+
+#### 客户端
+
+method in consoleLib.playerId.client.isPlayerId
+
+* 描述
+  
+  判断实体id是不是玩家id
+
+* 参数
+  
+  | 参数名 | 数据类型 | 描述   | 默认值 |
+  | --- |------|------| --- |
+  | eid | str  | 实体id |     |
+
+* 返回值
+  
+  | 数据类型 | 描述      |
+  |------|---------|
+  | bool | 是否是玩家id |
+
+* 示例
+
+```python
+# -*- coding: utf-8 -*-
+from consoleLib.clientApi import IsPlayerId
+
+print IsPlayerId(114514)
+```
+
 ## time / 时间
 
 ### GetCurrentTime
@@ -510,3 +575,38 @@ from consoleLib.clientApi import GetDistanceToSecondTargetPointFromPlayer
 
 print GetDistanceToSecondTargetPointFromPlayer(10, 1, PLAYER_ID)
 ```
+## command / 指令
+
+### IsRunByPlayer
+
+服务端
+
+method in consoleLib.command.server.origin
+
+* 描述
+  
+  判断自定义指令是否由玩家运行
+
+* 参数
+  
+  | 参数名  | 数据类型 | 描述  | 默认值 |
+  | ---- |------| --- | --- |
+  | originArgs | dict | CustomCommandTriggerServerEvent事件触发后的原始数据 |     |
+
+* 返回值
+  
+  | 数据类型 | 描述      |
+  |------|---------|
+  | bool | 是否由玩家运行 |
+
+* 示例
+
+```python
+# -*- coding: utf-8 -*-
+from consoleLib.serverApi import IsRunByPlayer
+
+@Listen
+def CustomCommandTriggerServerEvent(self, args):
+  print IsRunByPlayer(args)
+```
+
