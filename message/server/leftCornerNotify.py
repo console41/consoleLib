@@ -27,4 +27,4 @@ def SendMessageToPlayer(pid, msg, header, color=ENUM.ColorCode.WHITE):
     :param color: 颜色 默认白色
     :return: 无
     """
-    MsgComp.NotifyOneMessage(pid, header + str(msg), color)
+    MsgComp(pid).NotifyOneMessage(pid, header + str(msg), color)
