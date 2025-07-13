@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from .server.getDistance import *
+from .server.getDistance import GetDistanceToSecondTargetPointFromPlayer

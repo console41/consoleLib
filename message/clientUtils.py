@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from .client.leftCornerNotify import *
+from .client.leftCornerNotify import SendLocalMessage
