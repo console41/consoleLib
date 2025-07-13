@@ -11,6 +11,7 @@
   * [item / 物品](#item--物品)
     * [HaveItem](#haveitem)
   * [message / 消息](#message--消息)
+    * [SendLocalMessage](#sendlocalmessage)
     * [SendGlobalMessage](#sendglobalmessage)
     * [SendMessageToPlayer](#sendmessagetoplayer)
   * [title / 标题](#title--标题)
@@ -18,6 +19,7 @@
   * [playerId / 玩家ID](#playerid--玩家id)
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername)
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername-1)
+    * [GetPlayerIdByDimensionId](#getplayeridbydimensionid)
     * [IsIdPlayerId](#isidplayerid)
       * [服务端](#服务端)
       * [客户端](#客户端)
@@ -313,6 +315,36 @@ method in consoleLib.playerId.server.getPlayerId
   | 数据类型     | 描述                          |
   | -------- | --------------------------- |
   | str/None | 匹配到玩家ID返回玩家ID(str) 否则返回None |
+
+* 示例
+
+```python
+# -*- coding: utf-8 -*-
+from consoleLib.serverApi import GetPlayerIdByUid
+
+print GetPlayerIdByUid(-12345678987654321)
+```
+### GetPlayerIdByDimensionId
+
+服务端
+
+method in consoleLib.playerId.server.getPlayerId
+
+* 描述
+  
+  获取指定维度中所有的玩家
+
+* 参数
+  
+  | 参数名 | 数据类型 | 描述   | 默认值 |
+  | --- | ---- |------| --- |
+  | dimensionId | int  | 维度ID |     |
+
+* 返回值
+  
+  | 数据类型              | 描述                  |
+  |-------------------|---------------------|
+  | list\[str\]或者list | 玩家列表 没有玩家在此维度则返回空列表 |
 
 * 示例
 

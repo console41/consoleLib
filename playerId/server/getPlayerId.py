@@ -26,3 +26,17 @@ def GetPlayerIdByUid(uid):
         if uid == getUid:
             return pid
     return None
+
+
+def GetPlayerIdByDimensionId(dimensionId):
+    """
+    获取指定维度中所有的玩家
+    :param dimensionId:维度ID
+    :return: 玩家列表
+    """
+    result = []
+    for pid in serverApi.GetPlayerList():
+        currentDimensionId = DimensionComp(pid).GetEntityDimensionId()
+        if currentDimensionId == dimensionId:
+            result.append(pid)
+    return result
