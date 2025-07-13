@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from .server.origin import *
+from .server.origin import IsRunByPlayer
