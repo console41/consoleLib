@@ -21,6 +21,8 @@ EntityDefinitionsComp = COMPONENT_FACTORY.CreateEntityDefinitions
 PlayerComp = COMPONENT_FACTORY.CreatePlayer
 TagComp = COMPONENT_FACTORY.CreateTag
 EngineTypeComp = COMPONENT_FACTORY.CreateEngineType
+DimensionComp = COMPONENT_FACTORY.CreateDimension
+
 RunCommand = CommandComp.SetCommand
 
 ENUM = serverApi.GetMinecraftEnum()
