@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from ...constant.clientConstant import *
+from ...constant.serverConstant import *
 
 
-def GetDistanceToSecondTargetPointFromPlayer(end, count, playerId=PLAYER_ID):
+def GetPosFromPlayerRot(playerId, end, count):
     """
-    计算从玩家开始到玩家朝向指定位置第二个点的距离
+    计算玩家朝向向前指定距离的坐标
+    :param playerId: 玩家ID
     :param end: 第二个点的距离
     :param count: 点位数量 即分成多少个坐标
-    :param playerId: 玩家ID 默认本地玩家ID
     :return: 坐标列表
     """
-    playerPos = COMPONENT_FACTORY.CreatePos(playerId).GetFootPos()
+    playerPos = PosComp(playerId).GetFootPos()
     if not playerPos:
         return []
     playerPos = (playerPos[0], playerPos[1] + 1.6, playerPos[2])
 
-    rot = COMPONENT_FACTORY.CreateRot(playerId).GetRot()
+    rot = RotComp(playerId).GetRot()
     if not rot:
         return []
-    direction = clientApi.GetDirFromRot(rot)
+    direction = serverApi.GetDirFromRot(rot)
     endPos = (
         playerPos[0] + direction[0] * end,
         playerPos[1] + direction[1] * end,
