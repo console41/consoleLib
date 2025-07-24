@@ -3,66 +3,48 @@
 ## 目录
 
 <!-- TOC -->
-
 * [ConsoleLib文档](#consolelib文档)
-  
   * [目录](#目录)
-  
   * [constant](#constant)
-  
   * [control / 控制](#control--控制)
-    
     * [FullScreenUI](#fullscreenui)
-  
   * [item / 物品](#item--物品)
-    
     * [HaveItem](#haveitem)
-  
   * [message / 消息](#message--消息)
-    
     * [SendLocalMessage](#sendlocalmessage)
     * [SendGlobalMessage](#sendglobalmessage)
     * [SendMessageToPlayer](#sendmessagetoplayer)
-  
   * [title / 标题](#title--标题)
-    
     * [SetMiddleTitle](#setmiddletitle)
-  
   * [playerId / 玩家ID](#playerid--玩家id)
-    
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername)
-    * [GetPlayerIdByPlayerName](#getplayeridbyplayername-1)
+    * [GetPlayerIdByPlayerUid](#getplayeridbyplayeruid)
     * [GetPlayerIdByDimensionId](#getplayeridbydimensionid)
     * [IsIdPlayerId](#isidplayerid)
-      * [服务端](#服务端)
-      * [客户端](#客户端)
-  
-  * [time / 时间](#time--时间)
-    
-    * [GetCurrentTime](#getcurrenttime)
-    * [GetDay](#getday)
       * [服务端接口](#服务端接口)
       * [客户端接口](#客户端接口)
-    * [GetTimeOfDay](#gettimeofday)
+  * [time / 时间](#time--时间)
+    * [GetCurrentTime](#getcurrenttime)
+    * [GetDay](#getday)
       * [服务端接口](#服务端接口-1)
       * [客户端接口](#客户端接口-1)
-  
+    * [GetTimeOfDay](#gettimeofday)
+      * [服务端接口](#服务端接口-2)
+      * [客户端接口](#客户端接口-2)
   * [position / 位置](#position--位置)
-    
     * [GetEuclideanDistance](#geteuclideandistance)
     * [GetNearestEntity](#getnearestentity)
-      * [服务端接口](#服务端接口-2)
-    * [GetNearestEntity](#getnearestentity-1)
-      * [客户端接口](#客户端接口-2)
-    * [GetDistanceToSecondTargetPointFromPlayer](#getdistancetosecondtargetpointfromplayer)
       * [服务端接口](#服务端接口-3)
       * [客户端接口](#客户端接口-3)
-  
+    * [GetNearestPlayer](#getnearestplayer)
+      * [服务端接口](#服务端接口-4)
+      * [客户端接口](#客户端接口-4)
+    * [GetPosFromPlayerRot](#getposfromplayerrot)
+      * [服务端接口](#服务端接口-5)
+      * [客户端接口](#客户端接口-5)
   * [command / 指令](#command--指令)
-    
     * [IsRunByPlayer](#isrunbyplayer)
-      
-      <!-- TOC -->
+<!-- TOC -->
 
 ## constant
 
@@ -319,7 +301,7 @@ method in consoleLib.playerId.server.getPlayerId
   print GetPlayerIdByPlayerName('Console')
   ```
 
-### GetPlayerIdByPlayerName
+### GetPlayerIdByPlayerUid
 
 服务端
 
@@ -383,7 +365,7 @@ method in consoleLib.playerId.server.getPlayerId
 
 ### IsIdPlayerId
 
-#### 服务端
+#### 服务端接口
 
 method in consoleLib.playerId.server.isPlayerId
 
@@ -412,7 +394,7 @@ method in consoleLib.playerId.server.isPlayerId
   print IsPlayerId(114514)
   ```
 
-#### 客户端
+#### 客户端接口
 
 method in consoleLib.playerId.client.isPlayerId
 
@@ -640,9 +622,10 @@ method in consoleLib.position.server.getEntities
 
 * 参数
   
-  | 参数名   | 数据类型                         | 描述  | 默认值 |
-  | ----- | ---------------------------- | --- | --- |
-  | point | tuple\[float, float, float\] | 坐标  |     |
+  | 参数名          | 数据类型                         | 描述          | 默认值  |
+  | ------------ | ---------------------------- | ----------- | ---- |
+  | point        | tuple\[float, float, float\] | 坐标          |      |
+  | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
 
 * 返回值
   
@@ -670,14 +653,15 @@ method in consoleLib.position.client.getEntities
 
 * 参数
   
-  | 参数名   | 数据类型                         | 描述  | 默认值 |
-  | ----- | ---------------------------- | --- | --- |
-  | point | tuple\[float, float, float\] | 坐标  |     |
+  | 参数名          | 数据类型                         | 描述          | 默认值  |
+  | ------------ | ---------------------------- | ----------- | ---- |
+  | point        | tuple\[float, float, float\] | 坐标          |      |
+  | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
 
 * 返回值
   
   | 数据类型 | 描述                                         |
-  | ---- |--------------------------------------------|
+  | ---- | ------------------------------------------ |
   | dict | id为实体id列表(可能有距离相同的实体) 没有实体则为{} distance为距离 |
 
 * 示例
@@ -697,11 +681,14 @@ method in consoleLib.position.server.getEntities
 
 - 描述
   
-  获取离当前一点最近的玩家参数
+  获取离当前一点最近的玩家
 
-- | 参数名   | 数据类型                       | 描述  | 默认值 |
-  | ----- | -------------------------- | --- | --- |
-  | point | tuple[float, float, float] | 坐标  |     |
+- 参数
+  
+  | 参数名          | 数据类型                         | 描述          | 默认值  |
+  | ------------ | ---------------------------- | ----------- | ---- |
+  | point        | tuple\[float, float, float\] | 坐标          |      |
+  | exceptedList | list\[str\]                  | 需要排除的实体id列表 | \[\] |
 
 - 返回值
   
@@ -716,7 +703,7 @@ method in consoleLib.position.server.getEntities
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import GetNearestPlayer
   
-  print GetNearestPlayer(PosComp(serverApi.GetPlayerList()[0]).GetPos)
+  print GetNearestPlayer(PosComp(serverApi.GetPlayerList()[0]).GetPos())
   ```
 
 #### 客户端接口
@@ -729,9 +716,10 @@ method in consoleLib.position.client.getEntities
 
 - 参数
   
-  | 参数名   | 数据类型                       | 描述  | 默认值 |
-  | ----- | -------------------------- | --- | --- |
-  | point | tuple[float, float, float] | 坐标  |     |
+  | 参数名          | 数据类型                         | 描述          | 默认值  |
+  | ------------ | ---------------------------- | ----------- | ---- |
+  | point        | tuple\[float, float, float\] | 坐标          |      |
+  | exceptedList | list\[str\]                  | 需要排除的实体id列表 | \[\] |
 
 - 返回值
   
@@ -748,17 +736,17 @@ method in consoleLib.position.client.getEntities
   print GetNearestPlayer((0, 0, 0))
   ```
 
-### GetDistanceToSecondTargetPointFromPlayer
+### GetPosFromPlayerRot
 
 服务端 客户端
 
 #### 服务端接口
 
-method in consoleLib.position.server.getDistance
+method in consoleLib.position.server.getPos
 
 * 描述
   
-  计算从玩家开始到玩家朝向指定位置第二个点的距离
+  计算玩家朝向向前指定距离的坐标
 
 * 参数
   
@@ -779,18 +767,18 @@ method in consoleLib.position.server.getDistance
   ```python
   # -*- coding: utf-8 -*-
   from consoleLib.constant.serverConstant import *
-  from consoleLib.serverApi import GetDistanceToSecondTargetPointFromPlayer
+  from consoleLib.serverApi import GetPosFromPlayerRot
   
-  print GetDistanceToSecondTargetPointFromPlayer(serverApi.GetPlayerList()[0], 10, 1)
+  print GetPosFromPlayerRot(serverApi.GetPlayerList()[0], 10, 1)
   ```
 
 #### 客户端接口
 
-method in consoleLib.position.client.getDistance
+method in consoleLib.position.client.getPos
 
 * 描述
   
-  计算从玩家开始到玩家朝向指定位置第二个点的距离
+  计算玩家朝向向前指定距离的坐标
 
 * 参数
   
@@ -811,9 +799,9 @@ method in consoleLib.position.client.getDistance
   ```python
   # -*- coding: utf-8 -*-
   from consoleLib.constant.clientConstant import *
-  from consoleLib.clientApi import GetDistanceToSecondTargetPointFromPlayer
+  from consoleLib.clientApi import GetPosFromPlayerRot
   
-  print GetDistanceToSecondTargetPointFromPlayer(10, 1, PLAYER_ID)
+  print GetPosFromPlayerRot(10, 1, PLAYER_ID)
   ```
 
 ## command / 指令
@@ -848,5 +836,5 @@ method in consoleLib.command.server.origin
   
   @Listen
   def CustomCommandTriggerServerEvent(self, args):
-      print IsRunByPlayer(args)
+    print IsRunByPlayer(args)
   ```

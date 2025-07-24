@@ -3,13 +3,15 @@ from ..common.getDistance import GetEuclideanDistance
 from ...constant.serverConstant import *
 
 
-def GetNearestEntity(point):
+def GetNearestEntity(point, exceptedList=[]):
     """
     获取离当前一点最近的实体
     :param point:坐标
+    :param exceptedList: 需要排除的实体id列表
     :return: 字典 eid为实体id列表(可能有距离相同的实体) 没有实体则为{} distance为距离
     """
-    entities = serverApi.GetEngineActor()
+    entities = serverApi.GetEngineActor().keys()
+    entities.remove(i for i in exceptedList)
     entityDistances = {
         eid: GetEuclideanDistance(point, PosComp(eid).GetPos())
         for eid in entities
@@ -23,13 +25,15 @@ def GetNearestEntity(point):
     }
 
 
-def GetNearestPlayer(point):
+def GetNearestPlayer(point, exceptedList=[]):
     """
     获取离当前一点最近的玩家
     :param point:坐标
+    :param exceptedList: 需要排除的玩家id列表
     :return: 字典 eid为玩家id列表(可能有距离相同的玩家) 没有玩家则为{} distance为距离
     """
     players = serverApi.GetPlayerList()
+    players.remove(i for i in exceptedList)
     playerDistances = {
         eid: GetEuclideanDistance(point, PosComp(eid).GetPos())
         for eid in players
