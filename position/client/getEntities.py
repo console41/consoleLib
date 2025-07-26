@@ -11,7 +11,8 @@ def GetNearestEntity(point, exceptedList=[]):
     :return: 字典 eid为实体id列表(可能有距离相同的实体) 没有实体则为{} distance为距离
     """
     entities = clientApi.GetEngineActor().keys()
-    entities.remove(i for i in exceptedList)
+    for i in exceptedList:
+        entities.remove(i)
     entityDistances = {
         eid: GetEuclideanDistance(point, PosComp(eid).GetPos())
         for eid in entities
@@ -33,7 +34,8 @@ def GetNearestPlayer(point, exceptedList=[]):
     :return: 字典 eid为玩家id列表(可能有距离相同的玩家) 没有玩家则为{} distance为距离
     """
     players = clientApi.GetPlayerList()
-    players.remove(i for i in exceptedList)
+    for i in exceptedList:
+        players.remove(i)
     playerDistances = {
         eid: GetEuclideanDistance(point, PosComp(eid).GetPos())
         for eid in players
