@@ -3,6 +3,7 @@
 ## 目录
 
 <!-- TOC -->
+
 * [ConsoleLib文档](#consolelib文档)
   * [目录](#目录)
   * [constant](#constant)
@@ -44,7 +45,8 @@
       * [客户端接口](#客户端接口-5)
   * [command / 指令](#command--指令)
     * [IsRunByPlayer](#isrunbyplayer)
-<!-- TOC -->
+      
+      <!-- TOC -->
 
 ## constant
 
@@ -629,9 +631,9 @@ method in consoleLib.position.server.getEntities
 
 * 返回值
   
-  | 数据类型 | 描述                                         |
-  | ---- | ------------------------------------------ |
-  | dict | id为实体id列表(可能有距离相同的实体) 没有实体则为{} distance为距离 |
+  | 数据类型 | 描述                                          |
+  | ---- | ------------------------------------------- |
+  | dict | eid为实体id列表(可能有距离相同的实体) 没有实体则为{} distance为距离 |
 
 * 示例
   
@@ -641,6 +643,11 @@ method in consoleLib.position.server.getEntities
   from consoleLib.serverApi import GetNearestEntity
   
   print GetNearestEntity(PosComp(serverApi.GetPlayerList()[0]).GetPos)
+  # 返回示例
+  # {
+  #     'eid': -2147483647
+  #     'distance': 10.98321
+  # }
   ```
 
 #### 客户端接口
@@ -660,9 +667,9 @@ method in consoleLib.position.client.getEntities
 
 * 返回值
   
-  | 数据类型 | 描述                                         |
-  | ---- | ------------------------------------------ |
-  | dict | id为实体id列表(可能有距离相同的实体) 没有实体则为{} distance为距离 |
+  | 数据类型 | 描述                                          |
+  | ---- | ------------------------------------------- |
+  | dict | eid为实体id列表(可能有距离相同的实体) 没有实体则为{} distance为距离 |
 
 * 示例
   
@@ -671,6 +678,11 @@ method in consoleLib.position.client.getEntities
   from consoleLib.clientApi import GetNearestEntity
   
   print GetNearestEntity((0, 0, 0))
+  # 返回示例
+  # {
+  #     'eid': -2147483647
+  #     'distance': 10.98321
+  # }
   ```
 
 ### GetNearestPlayer
@@ -692,9 +704,9 @@ method in consoleLib.position.server.getEntities
 
 - 返回值
   
-  | 数据类型 | 描述                                         |
-  | ---- | ------------------------------------------ |
-  | dict | id为实体id列表(可能有距离相同的实体) 没有实体则为{} distance为距离 |
+  | 数据类型 | 描述                                          |
+  | ---- | ------------------------------------------- |
+  | dict | pid为实体id列表(可能有距离相同的玩家) 没有玩家则为{} distance为距离 |
 
 - 示例
   
@@ -704,6 +716,11 @@ method in consoleLib.position.server.getEntities
   from consoleLib.serverApi import GetNearestPlayer
   
   print GetNearestPlayer(PosComp(serverApi.GetPlayerList()[0]).GetPos())
+  # 返回示例
+  # {
+  #     'pid': -2147483647
+  #     'distance': 10.98321
+  # }
   ```
 
 #### 客户端接口
@@ -725,7 +742,7 @@ method in consoleLib.position.client.getEntities
   
   | 数据类型 | 描述                                          |
   | ---- | ------------------------------------------- |
-  | dict | eid为玩家id列表(可能有距离相同的玩家) 没有玩家则为{} distance为距离 |
+  | dict | pid为玩家id列表(可能有距离相同的玩家) 没有玩家则为{} distance为距离 |
 
 - 示例
   
@@ -734,6 +751,7 @@ method in consoleLib.position.client.getEntities
   from consoleLib.clientApi import GetNearestPlayer
   
   print GetNearestPlayer((0, 0, 0))
+  
   ```
 
 ### GetPosFromPlayerRot
