@@ -20,10 +20,7 @@ def GetNearestEntity(point, exceptedList=[]):
     if not entityDistances:
         return {}
     minDistance = min(entityDistances.values())
-    return {
-        'eid': [eid for eid, distance in entityDistances.items() if distance == minDistance],
-        'distance': minDistance
-    }
+    return [eid for eid, distance in entityDistances.items() if distance == minDistance], minDistance
 
 
 def GetNearestPlayer(point, exceptedList=[]):
@@ -43,7 +40,4 @@ def GetNearestPlayer(point, exceptedList=[]):
     if not playerDistances:
         return {}
     minDistance = min(playerDistances.values())
-    return {
-        'pid': [pid for pid, distance in playerDistances.items() if distance == minDistance],
-        'distance': minDistance
-    }
+    return [pid for pid, distance in playerDistances.items() if distance == minDistance], minDistance

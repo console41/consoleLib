@@ -4,64 +4,64 @@
 
 <!-- TOC -->
 
-* [ConsoleLib文档](#consolelib文档)
+- [ConsoleLib文档](#consolelib文档)
   
-  * [目录](#目录)
+  - [目录](#目录)
   
-  * [constant](#constant)
+  - [constant](#constant)
   
-  * [control / 控制](#control--控制)
+  - [control / 控制](#control--控制)
     
-    * [FullScreenUI](#fullscreenui)
+    - [FullScreenUI](#fullscreenui)
   
-  * [item / 物品](#item--物品)
+  - [item / 物品](#item--物品)
     
-    * [HaveItem](#haveitem)
+    - [HaveItem](#haveitem)
   
-  * [message / 消息](#message--消息)
+  - [message / 消息](#message--消息)
     
-    * [SendLocalMessage](#sendlocalmessage)
-    * [SendGlobalMessage](#sendglobalmessage)
-    * [SendMessageToPlayer](#sendmessagetoplayer)
+    - [SendLocalMessage](#sendlocalmessage)
+    - [SendGlobalMessage](#sendglobalmessage)
+    - [SendMessageToPlayer](#sendmessagetoplayer)
   
-  * [title / 标题](#title--标题)
+  - [title / 标题](#title--标题)
     
-    * [SetMiddleTitle](#setmiddletitle)
+    - [SetMiddleTitle](#setmiddletitle)
   
-  * [playerId / 玩家ID](#playerid--玩家id)
+  - [playerId / 玩家ID](#playerid--玩家id)
     
-    * [GetPlayerIdByPlayerName](#getplayeridbyplayername)
-    * [GetPlayerIdByPlayerUid](#getplayeridbyplayeruid)
-    * [GetPlayerIdByDimensionId](#getplayeridbydimensionid)
-    * [IsIdPlayerId](#isidplayerid)
-      * [服务端接口](#服务端接口)
-      * [客户端接口](#客户端接口)
+    - [GetPlayerIdByPlayerName](#getplayeridbyplayername)
+    - [GetPlayerIdByPlayerUid](#getplayeridbyplayeruid)
+    - [GetPlayerIdByDimensionId](#getplayeridbydimensionid)
+    - [IsIdPlayerId](#isidplayerid)
+      - [服务端接口](#服务端接口)
+      - [客户端接口](#客户端接口)
   
-  * [time / 时间](#time--时间)
+  - [time / 时间](#time--时间)
 
-    * [GetDay](#getday)
-      * [服务端接口](#服务端接口-1)
-      * [客户端接口](#客户端接口-1)
-    * [GetTimeOfDay](#gettimeofday)
-      * [服务端接口](#服务端接口-2)
-      * [客户端接口](#客户端接口-2)
+    - [GetDay](#getday)
+      - [服务端接口](#服务端接口-1)
+      - [客户端接口](#客户端接口-1)
+    - [GetTimeOfDay](#gettimeofday)
+      - [服务端接口](#服务端接口-2)
+      - [客户端接口](#客户端接口-2)
   
-  * [position / 位置](#position--位置)
+  - [position / 位置](#position--位置)
     
-    * [GetEuclideanDistance](#geteuclideandistance)
-    * [GetNearestEntity](#getnearestentity)
-      * [服务端接口](#服务端接口-3)
-      * [客户端接口](#客户端接口-3)
-    * [GetNearestPlayer](#getnearestplayer)
-      * [服务端接口](#服务端接口-4)
-      * [客户端接口](#客户端接口-4)
-    * [GetPosFromPlayerRot](#getposfromplayerrot)
-      * [服务端接口](#服务端接口-5)
-      * [客户端接口](#客户端接口-5)
+    - [GetEuclideanDistance](#geteuclideandistance)
+    - [GetNearestEntity](#getnearestentity)
+      - [服务端接口](#服务端接口-3)
+      - [客户端接口](#客户端接口-3)
+    - [GetNearestPlayer](#getnearestplayer)
+      - [服务端接口](#服务端接口-4)
+      - [客户端接口](#客户端接口-4)
+    - [GetPosFromPlayerRot](#getposfromplayerrot)
+      - [服务端接口](#服务端接口-5)
+      - [客户端接口](#客户端接口-5)
   
-  * [command / 指令](#command--指令)
+  - [command / 指令](#command--指令)
     
-    * [IsRunByPlayer](#isrunbyplayer)
+    - [IsRunByPlayer](#isrunbyplayer)
       
       <!-- TOC -->
 
@@ -74,7 +74,7 @@ constant储存了组件工厂```clientApi.GetEngineCompFactory()```的组件 避
 示例:
 
 ```python
-# -*- coding: utf-8 -*-
+# --- coding: utf-8 ---
 from consoleLib.constant.serverConstant import *
 
 for pid in serverApi.GetPlayerList():
@@ -89,24 +89,24 @@ for pid in serverApi.GetPlayerList():
 
 method in consoleLib.control.client.ui
 
-* 描述
+- 描述
   
   全屏UI 玩家无法移动 GUI界面隐藏
 
-* 参数
+- 参数
   
   | 参数名    | 数据类型 | 描述   | 默认值 |
   | ------ | ---- | ---- | --- |
   | isOpen | bool | 是否开启 |     |
 
-* 返回值
+- 返回值
   
   无
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.clientApi import FullScreenUI
   
   FullScreenUI(True)
@@ -120,25 +120,25 @@ method in consoleLib.control.client.ui
 
 method in consoleLib.item.haveItem
 
-* 描述
+- 描述
   
   判断玩家是否有指定物品
 
-* 参数
+- 参数
   
   | 参数名      | 数据类型 | 描述    | 默认值 |
   | -------- | ---- | ----- | --- |
   | pid      | str  | 玩家ID  |     |
   | itemName | str  | 物品标识符 |     |
 
-* 返回值
+- 返回值
   
   无
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import HaveItem
   
@@ -153,11 +153,11 @@ method in consoleLib.item.haveItem
 
 method in consoleLib.message.client.leftCornerNotify
 
-* 描述
+- 描述
   
   客户端发送一条消息
 
-* 参数
+- 参数
   
   | 参数名    | 数据类型 | 描述   | 默认值  |
   | ------ | ---- | ---- | ---- |
@@ -165,16 +165,16 @@ method in consoleLib.message.client.leftCornerNotify
   | header | str  | 消息头  | 空字符串 |
   | color  | str  | 颜色   | 白色   |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述   |
   | ---- | ---- |
   | bool | 是否成功 |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.clientApi import SendLocalMessage
   
   SendGlobalMessage('游戏即将开始', header='系统>>')
@@ -187,11 +187,11 @@ method in consoleLib.message.client.leftCornerNotify
 
 method in consoleLib.message.server.leftCornerNotify
 
-* 描述
+- 描述
   
   聊天框发送一条消息
 
-* 参数
+- 参数
   
   | 参数名    | 数据类型 | 描述   | 默认值  |
   | ------ | ---- | ---- | ---- |
@@ -199,16 +199,16 @@ method in consoleLib.message.server.leftCornerNotify
   | header | str  | 消息头  | 空字符串 |
   | color  | str  | 颜色   | 白色   |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述   |
   | ---- | ---- |
   | bool | 是否成功 |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import SendGlobalMessage
   
@@ -221,11 +221,11 @@ method in consoleLib.message.server.leftCornerNotify
 
 method in consoleLib.message.server.leftCornerNotify
 
-* 描述
+- 描述
   
   给指定玩家发送消息
 
-* 参数
+- 参数
   
   | 参数名    | 数据类型 | 描述        | 默认值  |
   | ------ | ---- | --------- | ---- |
@@ -234,14 +234,14 @@ method in consoleLib.message.server.leftCornerNotify
   | header | str  | 消息头       | 空字符串 |
   | color  | str  | 颜色        | 白色   |
 
-* 返回值
+- 返回值
   
   无
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import SendMessageToPlayer
   
@@ -256,11 +256,11 @@ method in consoleLib.message.server.leftCornerNotify
 
 method in consoleLib.message.server.title
 
-* 描述
+- 描述
   
   设置大标题 相当于title指令
 
-* 参数
+- 参数
   
   | 参数名        | 数据类型 | 描述      | 默认值   |
   | ---------- | ---- | ------- | ----- |
@@ -269,18 +269,18 @@ method in consoleLib.message.server.title
   | pid        | str  | 执行的玩家ID | None  |
   | showOutput | bool | 是否显示输出  | False |
 
-* 返回值
+- 返回值
   
   无
 
-* 备注
+- 备注
   
   只设置subtitle而不设置title美观度更高
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import SetMiddleTitle
   
@@ -295,26 +295,26 @@ method in consoleLib.message.server.title
 
 method in consoleLib.playerId.server.getPlayerId
 
-* 描述
+- 描述
   
   通过玩家名字 获取玩家Id
 
-* 参数
+- 参数
   
   | 参数名  | 数据类型 | 描述  | 默认值 |
   | ---- | ---- | --- | --- |
   | name | str  | 玩家名 |     |
 
-* 返回值
+- 返回值
   
   | 数据类型     | 描述                          |
   | -------- | --------------------------- |
   | str/None | 匹配到玩家ID返回玩家ID(str) 否则返回None |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.serverApi import GetPlayerIdByPlayerName
   
   print GetPlayerIdByPlayerName('Console')
@@ -326,26 +326,26 @@ method in consoleLib.playerId.server.getPlayerId
 
 method in consoleLib.playerId.server.getPlayerId
 
-* 描述
+- 描述
   
   通过指定UID 获取玩家ID
 
-* 参数
+- 参数
   
   | 参数名 | 数据类型 | 描述      | 默认值 |
   | --- | ---- | ------- | --- |
   | uid | int  | 玩家网易UID |     |
 
-* 返回值
+- 返回值
   
   | 数据类型     | 描述                          |
   | -------- | --------------------------- |
   | str/None | 匹配到玩家ID返回玩家ID(str) 否则返回None |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.serverApi import GetPlayerIdByUid
   
   print GetPlayerIdByUid(-12345678987654321)
@@ -357,26 +357,26 @@ method in consoleLib.playerId.server.getPlayerId
 
 method in consoleLib.playerId.server.getPlayerId
 
-* 描述
+- 描述
   
   获取指定维度中所有的玩家
 
-* 参数
+- 参数
   
   | 参数名         | 数据类型 | 描述   | 默认值 |
   | ----------- | ---- | ---- | --- |
   | dimensionId | int  | 维度ID |     |
 
-* 返回值
+- 返回值
   
-  | 数据类型              | 描述                  |
-  | ----------------- | ------------------- |
-  | list\[str\]或者list | 玩家列表 没有玩家在此维度则返回空列表 |
+  | 数据类型               | 描述   |
+  |--------------------|------|
+  | list\[str\]\| list | 玩家列表 没有玩家在此维度则返回空列表 |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.serverApi import GetPlayerIdByUid
   
   print GetPlayerIdByUid(-12345678987654321)
@@ -388,58 +388,58 @@ method in consoleLib.playerId.server.getPlayerId
 
 method in consoleLib.playerId.server.isPlayerId
 
-* 描述
+- 描述
   
   判断实体id是不是玩家id
 
-* 参数
+- 参数
   
   | 参数名 | 数据类型 | 描述   | 默认值 |
   | --- | ---- | ---- | --- |
   | eid | str  | 实体id |     |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述      |
   | ---- | ------- |
   | bool | 是否是玩家id |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
-  from consoleLib.serverApi import IsPlayerId
+  # --- coding: utf-8 ---
+  from consoleLib.serverApi import IsIdPlayerId
   
-  print IsPlayerId(114514)
+  print IsPlayerId(6666666666666)
   ```
 
 #### 客户端接口
 
 method in consoleLib.playerId.client.isPlayerId
 
-* 描述
+- 描述
   
   判断实体id是不是玩家id
 
-* 参数
+- 参数
   
   | 参数名 | 数据类型 | 描述   | 默认值 |
   | --- | ---- | ---- | --- |
   | eid | str  | 实体id |     |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述      |
   | ---- | ------- |
   | bool | 是否是玩家id |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
-  from consoleLib.clientApi import IsPlayerId
+  # --- coding: utf-8 ---
+  from consoleLib.clientApi import IsIdPlayerId
   
-  print IsPlayerId(114514)
+  print IsPlayerId(6666666666666)
   ```
 
 ## time / 时间
@@ -452,26 +452,26 @@ method in consoleLib.playerId.client.isPlayerId
 
 method in consoleLib.time.server.gameTime
 
-* 描述
+- 描述
   
   获取从游戏开始经过的游戏天数
 
-* 参数
+- 参数
   
   | 参数名  | 数据类型 | 描述                                 | 默认值  |
   | ---- | ---- | ---------------------------------- | ---- |
   | time | int  | 传入数字则计算帧数内经过的游戏天数 不传返回从游戏开始经过的游戏天数 | None |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述  |
   | ---- | --- |
   | int  | 天数  |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.serverApi import GetDay
   
   print GetDay(24000)  # 结果: 1 (表示经过了1天)
@@ -481,26 +481,26 @@ method in consoleLib.time.server.gameTime
 
 method in consoleLib.time.client.gameTime
 
-* 描述
+- 描述
   
   获取从游戏开始经过的游戏天数
 
-* 参数
+- 参数
   
   | 参数名  | 数据类型 | 描述                                 | 默认值  |
   | ---- | ---- | ---------------------------------- | ---- |
   | time | int  | 传入数字则计算帧数内经过的游戏天数 不传返回从游戏开始经过的游戏天数 | None |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述  |
   | ---- | --- |
   | int  | 天数  |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.clientApi import GetDay
   
   print GetDay()  # 结果: 游戏实际天数
@@ -514,26 +514,26 @@ method in consoleLib.time.client.gameTime
 
 method in consoleLib.time.server.gameTime
 
-* 描述
+- 描述
   
   获取当前游戏天内的帧数
 
-* 参数
+- 参数
   
   | 参数名  | 数据类型 | 描述                              | 默认值  |
   | ---- | ---- | ------------------------------- | ---- |
   | time | int  | 传入数字则计算帧数内游戏天内的帧数 不传返回当前游戏天内的帧数 | None |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述  |
   | ---- | --- |
   | int  | 帧数  |
 
-* 示例
+- 示例
 
 ```python
-# -*- coding: utf-8 -*-
+# --- coding: utf-8 ---
 from consoleLib.serverApi import GetTimeOfDay
 
 print GetTimeOfDay()
@@ -543,26 +543,26 @@ print GetTimeOfDay()
 
 method in consoleLib.time.client.gameTime
 
-* 描述
+- 描述
   
   获取当前游戏天内的帧数
 
-* 参数
+- 参数
   
   | 参数名  | 数据类型 | 描述                              | 默认值  |
   | ---- | ---- | ------------------------------- | ---- |
   | time | int  | 传入数字则计算帧数内游戏天内的帧数 不传返回当前游戏天内的帧数 | None |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述  |
   | ---- | --- |
   | int  | 帧数  |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.clientApi import GetTimeOfDay
   
   print GetTimeOfDay()
@@ -576,21 +576,21 @@ method in consoleLib.time.client.gameTime
 
 method in consoleLib.position.common.getDistance
 
-* 描述
+- 描述
   
   计算两个三元组表示的点之间的欧几里得距离
 
-* 参数
+- 参数
   
   | 参数名    | 数据类型                         | 描述      | 默认值 |
   | ------ | ---------------------------- | ------- | --- |
   | point1 | tuple\[float, float, float\] | 第1个点的坐标 |     |
   | point2 | tuple\[float, float, float\] | 第2个点的坐标 |     |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.commonApi import GetEuclideanDistance
   
   GetEuclideanDistance((0, 0, 0), (1, 1, 1))
@@ -602,71 +602,62 @@ method in consoleLib.position.common.getDistance
 
 method in consoleLib.position.server.getEntities
 
-* 描述
+- 描述
   
   获取离当前一点最近的实体
 
-* 参数
+- 参数
   
   | 参数名          | 数据类型                         | 描述          | 默认值  |
   | ------------ | ---------------------------- | ----------- | ---- |
   | point        | tuple\[float, float, float\] | 坐标          |      |
   | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
 
-* 返回值
+- 返回值
   
-  | 数据类型 | 描述                                          |
-  | ---- | ------------------------------------------- |
-  | dict | eid为实体id列表(可能有距离相同的实体) 没有实体则为{} distance为距离 |
+  | 数据类型                        | 描述        |
+  |-----------------------------|-----------|
+  | tuple\[list\[str\], float\] | 实体id列表和距离 |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import GetNearestEntity
   
-  print GetNearestEntity(PosComp(serverApi.GetPlayerList()[0]).GetPos)
-  # 返回示例
-  # {
-  #     'eid': -2147483647
-  #     'distance': 10.98321
-  # }
+  eid, distance = GetNearestEntity(PosComp(serverApi.GetPlayerList()[0]).GetPos)
+
   ```
 
 #### 客户端接口
 
 method in consoleLib.position.client.getEntities
 
-* 描述
+- 描述
   
   获取离当前一点最近的实体
 
-* 参数
+- 参数
   
   | 参数名          | 数据类型                         | 描述          | 默认值  |
   | ------------ | ---------------------------- | ----------- | ---- |
   | point        | tuple\[float, float, float\] | 坐标          |      |
   | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
 
-* 返回值
+- 返回值
   
-  | 数据类型 | 描述                                          |
-  | ---- | ------------------------------------------- |
-  | dict | eid为实体id列表(可能有距离相同的实体) 没有实体则为{} distance为距离 |
+  | 数据类型                        | 描述        |
+  |-----------------------------|-----------|
+  | tuple\[list\[str\], float\] | 实体id列表和距离 |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.clientApi import GetNearestEntity
   
-  print GetNearestEntity((0, 0, 0))
-  # 返回示例
-  # {
-  #     'eid': -2147483647
-  #     'distance': 10.98321
-  # }
+  eid, distance GetNearestEntity((0, 0, 0))
   ```
 
 ### GetNearestPlayer
@@ -682,29 +673,24 @@ method in consoleLib.position.server.getEntities
 - 参数
   
   | 参数名          | 数据类型                         | 描述          | 默认值  |
-  | ------------ | ---------------------------- | ----------- | ---- |
+  | ------------ | ---------------------------- |-------------| ---- |
   | point        | tuple\[float, float, float\] | 坐标          |      |
-  | exceptedList | list\[str\]                  | 需要排除的实体id列表 | \[\] |
+  | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
 
 - 返回值
   
-  | 数据类型 | 描述                                          |
-  | ---- | ------------------------------------------- |
-  | dict | pid为实体id列表(可能有距离相同的玩家) 没有玩家则为{} distance为距离 |
+  | 数据类型                        | 描述        |
+  |-----------------------------|-----------|
+  | tuple\[list\[str\], float\] | 玩家id列表和距离 |
 
 - 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import GetNearestPlayer
   
-  print GetNearestPlayer(PosComp(serverApi.GetPlayerList()[0]).GetPos())
-  # 返回示例
-  # {
-  #     'pid': -2147483647
-  #     'distance': 10.98321
-  # }
+  pid, distance GetNearestPlayer(PosComp(serverApi.GetPlayerList()[0]).GetPos())
   ```
 
 #### 客户端接口
@@ -718,23 +704,23 @@ method in consoleLib.position.client.getEntities
 - 参数
   
   | 参数名          | 数据类型                         | 描述          | 默认值  |
-  | ------------ | ---------------------------- | ----------- | ---- |
+  | ------------ | ---------------------------- |-------------| ---- |
   | point        | tuple\[float, float, float\] | 坐标          |      |
-  | exceptedList | list\[str\]                  | 需要排除的实体id列表 | \[\] |
+  | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
 
 - 返回值
   
-  | 数据类型 | 描述                                          |
-  | ---- | ------------------------------------------- |
-  | dict | pid为玩家id列表(可能有距离相同的玩家) 没有玩家则为{} distance为距离 |
+  | 数据类型                        | 描述        |
+  |-----------------------------|-----------|
+  | tuple\[list\[str\], float\] | 玩家id列表和距离 |
 
 - 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.clientApi import GetNearestPlayer
   
-  print GetNearestPlayer((0, 0, 0))
+  pid, distance GetNearestPlayer((0, 0, 0))
   ```
 
 ### GetPosFromPlayerRot
@@ -745,11 +731,11 @@ method in consoleLib.position.client.getEntities
 
 method in consoleLib.position.server.getPos
 
-* 描述
+- 描述
   
   计算玩家朝向向前指定距离的坐标
 
-* 参数
+- 参数
   
   | 参数名      | 数据类型 | 描述            | 默认值 |
   | -------- | ---- | ------------- | --- |
@@ -757,16 +743,16 @@ method in consoleLib.position.server.getPos
   | end      | int  | 第二个点的距离       |     |
   | count    | int  | 点位数量 即分成多少个坐标 |     |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述          |
   | ---- | ----------- |
   | list | 坐标列表 错误时为[] |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import GetPosFromPlayerRot
   
@@ -777,11 +763,11 @@ method in consoleLib.position.server.getPos
 
 method in consoleLib.position.client.getPos
 
-* 描述
+- 描述
   
   计算玩家朝向向前指定距离的坐标
 
-* 参数
+- 参数
   
   | 参数名      | 数据类型 | 描述            | 默认值                          |
   | -------- | ---- | ------------- | ---------------------------- |
@@ -789,16 +775,16 @@ method in consoleLib.position.client.getPos
   | count    | int  | 点位数量 即分成多少个坐标 |                              |
   | playerId | str  | 玩家ID          | clientApi.GetLocalPlayerId() |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述          |
   | ---- | ----------- |
   | list | 坐标列表 错误时为[] |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.constant.clientConstant import *
   from consoleLib.clientApi import GetPosFromPlayerRot
   
@@ -813,26 +799,26 @@ method in consoleLib.position.client.getPos
 
 method in consoleLib.command.server.origin
 
-* 描述
+- 描述
   
   判断自定义指令是否由玩家运行
 
-* 参数
+- 参数
   
   | 参数名        | 数据类型 | 描述                                        | 默认值 |
   | ---------- | ---- | ----------------------------------------- | --- |
   | originArgs | dict | CustomCommandTriggerServerEvent事件触发后的原始数据 |     |
 
-* 返回值
+- 返回值
   
   | 数据类型 | 描述      |
   | ---- | ------- |
   | bool | 是否由玩家运行 |
 
-* 示例
+- 示例
   
   ```python
-  # -*- coding: utf-8 -*-
+  # --- coding: utf-8 ---
   from consoleLib.serverApi import IsRunByPlayer
   
   @Listen
