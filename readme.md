@@ -5,34 +5,49 @@
 <!-- TOC -->
 
 * [ConsoleLib文档](#consolelib文档)
+  
   * [目录](#目录)
+  
   * [constant](#constant)
+  
   * [control / 控制](#control--控制)
+    
     * [FullScreenUI](#fullscreenui)
+  
   * [item / 物品](#item--物品)
+    
     * [HaveItem](#haveitem)
+  
   * [message / 消息](#message--消息)
+    
     * [SendLocalMessage](#sendlocalmessage)
     * [SendGlobalMessage](#sendglobalmessage)
     * [SendMessageToPlayer](#sendmessagetoplayer)
+  
   * [title / 标题](#title--标题)
+    
     * [SetMiddleTitle](#setmiddletitle)
+  
   * [playerId / 玩家ID](#playerid--玩家id)
+    
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername)
     * [GetPlayerIdByPlayerUid](#getplayeridbyplayeruid)
     * [GetPlayerIdByDimensionId](#getplayeridbydimensionid)
     * [IsIdPlayerId](#isidplayerid)
       * [服务端接口](#服务端接口)
       * [客户端接口](#客户端接口)
+  
   * [time / 时间](#time--时间)
-    * [GetCurrentTime](#getcurrenttime)
+
     * [GetDay](#getday)
       * [服务端接口](#服务端接口-1)
       * [客户端接口](#客户端接口-1)
     * [GetTimeOfDay](#gettimeofday)
       * [服务端接口](#服务端接口-2)
       * [客户端接口](#客户端接口-2)
+  
   * [position / 位置](#position--位置)
+    
     * [GetEuclideanDistance](#geteuclideandistance)
     * [GetNearestEntity](#getnearestentity)
       * [服务端接口](#服务端接口-3)
@@ -43,7 +58,9 @@
     * [GetPosFromPlayerRot](#getposfromplayerrot)
       * [服务端接口](#服务端接口-5)
       * [客户端接口](#客户端接口-5)
+  
   * [command / 指令](#command--指令)
+    
     * [IsRunByPlayer](#isrunbyplayer)
       
       <!-- TOC -->
@@ -427,39 +444,6 @@ method in consoleLib.playerId.client.isPlayerId
 
 ## time / 时间
 
-### GetCurrentTime
-
-服务端 客户端
-
-method in consoleLib.time.all.currentRealTime
-
-* 描述
-  
-  获取当前时间信息
-
-* 参数
-  
-  无
-
-* 返回值
-  
-  | 数据类型 | 描述                  |
-  | ---- | ------------------- |
-  | dict | 年 月 日 时 分 秒 微秒 时区信息 |
-
-* 备注
-  
-  无需区分```serverApi```和```clientApi``` 直接调用即可
-
-* 示例
-  
-  ```python
-  # -*- coding: utf-8 -*-
-  from consoleLib.commonApi import GetCurrentTime
-  
-  print GetCurrentTime()
-  ```
-
 ### GetDay
 
 服务端 客户端
@@ -751,7 +735,6 @@ method in consoleLib.position.client.getEntities
   from consoleLib.clientApi import GetNearestPlayer
   
   print GetNearestPlayer((0, 0, 0))
-  
   ```
 
 ### GetPosFromPlayerRot
