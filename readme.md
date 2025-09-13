@@ -10,6 +10,7 @@
   * [control / 控制](#control--控制)
     * [FullScreenUI](#fullscreenui)
   * [item / 物品](#item--物品)
+    * [CreateItemDict](#createitemdict)
     * [HaveItem](#haveitem)
   * [message / 消息](#message--消息)
     * [SendLocalMessage](#sendlocalmessage)
@@ -97,6 +98,49 @@ method in consoleLib.control.client.ui
   ```
 
 ## item / 物品
+
+### CreateItemDict
+
+服务端 客户端
+
+method in consoleLib.item.itemDict
+
+- 描述
+  
+  构造物品信息字典
+
+- 参数
+  
+  | 参数名            | 数据类型                    | 描述                                  | 默认值  |
+  |----------------|-------------------------|-------------------------------------|------|
+  | newItemName    |                         | 必须设置 物品的identifier                  |      |
+  | newAuxValue    |                         | 必须设置 物品附加值                          | 0    |
+  | count          |                         | 必须设置 物品数量 设置为0时为空物品                 | 1    |
+  | showInHand     |                         | 可选 是否显示在手上                          | True |
+  | enchantData    | list\[tuple\[str, str]] | 可选 附魔数据                             | None |
+  | modEnchantData | list\[tuple\[str, str]] | 可选 自定义附魔数据                          | None |
+  | customTips     |                         | 可选 物品的自定义tips 修改该内容后会覆盖实例的组件        | ''   |
+  | extraId        |                         | 可选 物品自定义标识符 可以用于保存数据 区分物品           | ''   |
+  | userData       |                         | 可选 物品userData 用于灾厄旗帜、旗帜等物品 请勿随意设置该值 | None |
+  | durability     |                         | 可选 物品耐久度 不存在耐久概念的物品默认值为0            | 0    |
+  | itemName       |                         | 废弃 1.22及以前版本的旧identifier            | ''   |
+  | auxValue       |                         | 废弃 1.22及以前版本的旧物品附加值                 | 0    |
+
+- 返回值
+  
+  无
+
+- 示例
+  
+  ```python
+  # --- coding: utf-8 ---
+  from consoleLib.commonApi import CreateItemDict
+  
+  print CreateItemDict('console:item')
+  # {'newAuxValue': 0, 'newItemName': 'console:item', 'count': 1}
+  ```
+
+
 
 ### HaveItem
 
