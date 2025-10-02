@@ -5,34 +5,50 @@
 <!-- TOC -->
 
 * [ConsoleLib文档](#consolelib文档)
+  
   * [目录](#目录)
+  
   * [constant](#constant)
+  
   * [control / 控制](#control--控制)
+    
     * [FullScreenUI](#fullscreenui)
+  
   * [item / 物品](#item--物品)
+    
     * [CreateItemDict](#createitemdict)
     * [HaveItem](#haveitem)
+  
   * [message / 消息](#message--消息)
+    
     * [SendLocalMessage](#sendlocalmessage)
     * [SendGlobalMessage](#sendglobalmessage)
     * [SendMessageToPlayer](#sendmessagetoplayer)
+  
   * [title / 标题](#title--标题)
+    
     * [SetMiddleTitle](#setmiddletitle)
+  
   * [playerId / 玩家ID](#playerid--玩家id)
+    
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername)
     * [GetPlayerIdByPlayerUid](#getplayeridbyplayeruid)
     * [GetPlayerIdByDimensionId](#getplayeridbydimensionid)
     * [IsIdPlayerId](#isidplayerid)
       * [服务端接口](#服务端接口)
       * [客户端接口](#客户端接口)
+  
   * [time / 时间](#time--时间)
+    
     * [GetDay](#getday)
       * [服务端接口](#服务端接口-1)
       * [客户端接口](#客户端接口-1)
     * [GetTimeOfDay](#gettimeofday)
       * [服务端接口](#服务端接口-2)
       * [客户端接口](#客户端接口-2)
+  
   * [position / 位置](#position--位置)
+    
     * [GetEuclideanDistance](#geteuclideandistance)
     * [GetNearestEntity](#getnearestentity)
       * [服务端接口](#服务端接口-3)
@@ -43,9 +59,14 @@
     * [GetPosFromPlayerRot](#getposfromplayerrot)
       * [服务端接口](#服务端接口-5)
       * [客户端接口](#客户端接口-5)
+    * [GetPlayerHandPos](#getplayerhandpos)
+  
   * [random / 随机数](#random--随机数)
+    
     * [CanEventHappenByProbability](#caneventhappenbyprobability)
+  
   * [command / 指令](#command--指令)
+    
     * [IsRunByPlayer](#isrunbyplayer)
       
       <!-- TOC -->
@@ -112,7 +133,7 @@ method in consoleLib.item.itemDict
 - 参数
   
   | 参数名            | 数据类型                    | 描述                                  | 默认值  |
-  |----------------|-------------------------|-------------------------------------|------|
+  | -------------- | ----------------------- | ----------------------------------- | ---- |
   | newItemName    |                         | 必须设置 物品的identifier                  |      |
   | newAuxValue    |                         | 必须设置 物品附加值                          | 0    |
   | count          |                         | 必须设置 物品数量 设置为0时为空物品                 | 1    |
@@ -139,8 +160,6 @@ method in consoleLib.item.itemDict
   print CreateItemDict('console:item')
   # {'newAuxValue': 0, 'newItemName': 'console:item', 'count': 1}
   ```
-
-
 
 ### HaveItem
 
@@ -818,6 +837,38 @@ method in consoleLib.position.client.getPos
   print GetPosFromPlayerRot(10, 1, PLAYER_ID)
   ```
 
+### GetPlayerHandPos
+
+服务端 客户端
+
+method in consoleLib.position.common.getPos
+
+- 描述
+  
+  获取玩家手的位置
+
+- 参数
+  
+  | 参数名      | 数据类型 | 描述            | 默认值                          |
+  | -------- | ---- | ------------- | ---------------------------- |
+  | pid      | str  | 玩家ID       |                              |
+
+- 返回值
+  
+  | 数据类型 | 描述          |
+  | ---- | ----------- |
+  | tuple\[float, float, float] | 玩家手的位置 |
+
+- 示例
+  
+  ```python
+  # --- coding: utf-8 ---
+  from consoleLib.constant.serverConstant import *
+  from consoleLib.commonApi import GetPlayerHandPos
+  
+  print GetPlayerHandPos(serverApi.GetPlayerList[0])
+  ```
+
 ## random / 随机数
 
 ### CanEventHappenByProbability
@@ -829,18 +880,18 @@ method in consoleLib.random.common.probability
 - 描述
   
   判断事件是否以给定概率发生
+
 - 参数
   
   | 参数名         | 数据类型  | 描述                  | 默认值 |
   | ----------- | ----- | ------------------- | --- |
   | probability | float | 0-1之间的浮点数 表示事件发生的概率 |     |
+
 - 返回值
   
   | 数据类型 | 描述                    |
   | ---- | --------------------- |
   | bool | True表示事件发生 False表示不发生 |
-  
-  
 
 ## command / 指令
 
