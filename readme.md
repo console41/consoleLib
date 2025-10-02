@@ -673,7 +673,7 @@ method in consoleLib.position.server.getEntities
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import GetNearestEntity
   
-  eid, distance = GetNearestEntity(PosComp(serverApi.GetPlayerList()[0]).GetPos)
+  eid, distance = GetNearestEntity(PosComp(serverApi.GetPlayerList()[0]).GetPos())
   ```
 
 #### 客户端接口
@@ -892,6 +892,15 @@ method in consoleLib.random.common.probability
   | 数据类型 | 描述                    |
   | ---- | --------------------- |
   | bool | True表示事件发生 False表示不发生 |
+
+- 示例
+
+  ```python
+  from consoleLib.commonApi import CanEventHappenByProbability
+
+  if CanEventHappenByProbability(85%):
+    print 'consolelib'
+  ```
 
 ## command / 指令
 
