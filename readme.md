@@ -3,73 +3,66 @@
 ## 目录
 
 <!-- TOC -->
-
 * [ConsoleLib文档](#consolelib文档)
-  
   * [目录](#目录)
-  
   * [constant](#constant)
-  
   * [control / 控制](#control--控制)
-    
     * [FullScreenUI](#fullscreenui)
-  
   * [item / 物品](#item--物品)
-    
     * [CreateItemDict](#createitemdict)
     * [HaveItem](#haveitem)
-  
   * [message / 消息](#message--消息)
-    
     * [SendLocalMessage](#sendlocalmessage)
     * [SendGlobalMessage](#sendglobalmessage)
     * [SendMessageToPlayer](#sendmessagetoplayer)
-  
   * [title / 标题](#title--标题)
-    
     * [SetMiddleTitle](#setmiddletitle)
-  
   * [playerId / 玩家ID](#playerid--玩家id)
-    
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername)
     * [GetPlayerIdByPlayerUid](#getplayeridbyplayeruid)
     * [GetPlayerIdByDimensionId](#getplayeridbydimensionid)
     * [IsIdPlayerId](#isidplayerid)
       * [服务端接口](#服务端接口)
       * [客户端接口](#客户端接口)
-  
   * [time / 时间](#time--时间)
-    
-    * [GetDay](#getday)
+    * [AddTimer](#addtimer)
       * [服务端接口](#服务端接口-1)
       * [客户端接口](#客户端接口-1)
-    * [GetTimeOfDay](#gettimeofday)
+    * [AddRepeatedTimer](#addrepeatedtimer)
       * [服务端接口](#服务端接口-2)
       * [客户端接口](#客户端接口-2)
-  
-  * [position / 位置](#position--位置)
-    
-    * [GetEuclideanDistance](#geteuclideandistance)
-    * [GetNearestEntity](#getnearestentity)
+    * [Start](#start)
       * [服务端接口](#服务端接口-3)
       * [客户端接口](#客户端接口-3)
-    * [GetNearestPlayer](#getnearestplayer)
+    * [Pause](#pause)
       * [服务端接口](#服务端接口-4)
       * [客户端接口](#客户端接口-4)
-    * [GetPosFromPlayerRot](#getposfromplayerrot)
+    * [Cancel](#cancel)
       * [服务端接口](#服务端接口-5)
       * [客户端接口](#客户端接口-5)
+    * [GetDay](#getday)
+      * [服务端接口](#服务端接口-6)
+      * [客户端接口](#客户端接口-6)
+    * [GetTimeOfDay](#gettimeofday)
+      * [服务端接口](#服务端接口-7)
+      * [客户端接口](#客户端接口-7)
+  * [position / 位置](#position--位置)
+    * [GetEuclideanDistance](#geteuclideandistance)
+    * [GetNearestEntity](#getnearestentity)
+      * [服务端接口](#服务端接口-8)
+      * [客户端接口](#客户端接口-8)
+    * [GetNearestPlayer](#getnearestplayer)
+      * [服务端接口](#服务端接口-9)
+      * [客户端接口](#客户端接口-9)
+    * [GetPosFromPlayerRot](#getposfromplayerrot)
+      * [服务端接口](#服务端接口-10)
+      * [客户端接口](#客户端接口-10)
     * [GetPlayerHandPos](#getplayerhandpos)
-  
   * [random / 随机数](#random--随机数)
-    
     * [CanEventHappenByProbability](#caneventhappenbyprobability)
-  
   * [command / 指令](#command--指令)
-    
     * [IsRunByPlayer](#isrunbyplayer)
-      
-      <!-- TOC -->
+<!-- TOC -->
 
 ## constant
 
@@ -491,6 +484,321 @@ method in consoleLib.playerId.client.isPlayerId
 
 ## time / 时间
 
+### AddTimer
+
+服务端 客户端
+
+#### 服务端接口
+
+method in consoleLib.time.server.timer
+
+- 描述
+  
+  添加一次性定时器 使用Python标准库threading编写
+
+- 参数
+  
+  | 参数名      | 数据类型     | 描述        | 默认值 |
+  | -------- | -------- | --------- | --- |
+  | interval | float    | 定时器触发延迟时间 |     |
+  | function | function | 要执行的函数    |     |
+  | args     | tuple    | 函数的位置参数   | ()  |
+  | kwargs   | dict     | 函数的关键字参数  | {}  |
+
+- 返回值
+  
+  | 数据类型         | 描述       |
+  | ------------ | -------- |
+  | OneShotTimer | 一次性计时器实例 |
+
+- 示例
+  
+  ```python
+  # -*- coding: utf-8 -*-
+  from consoleLib.serverApi import AddTimer
+  
+  def CallBack(*args, **kwargs):
+      print args, kwargs
+  
+  AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
+  ```
+
+#### 客户端接口
+
+method in consoleLib.time.client.timer
+
+- 描述
+  
+  添加一次性定时器 使用Python标准库threading编写
+
+- 参数
+  
+  | 参数名      | 数据类型     | 描述        | 默认值 |
+  | -------- | -------- | --------- | --- |
+  | interval | float    | 定时器触发延迟时间 |     |
+  | function | function | 要执行的函数    |     |
+  | args     | tuple    | 函数的位置参数   | ()  |
+  | kwargs   | dict     | 函数的关键字参数  | {}  |
+
+- 返回值
+  
+  | 数据类型         | 描述       |
+  | ------------ | -------- |
+  | OneShotTimer | 一次性计时器实例 |
+
+- 示例
+  
+  ```python
+  # -*- coding: utf-8 -*-
+  from consoleLib.clientApi import AddTimer
+  
+  def CallBack(*args, **kwargs):
+      print args, kwargs
+  
+  AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
+  ```
+
+### AddRepeatedTimer
+
+服务端 客户端
+
+#### 服务端接口
+
+method in consoleLib.time.server.timer
+
+- 描述
+  
+  添加重复定时器 使用Python标准库threading编写
+
+- 参数
+  
+  | 参数名      | 数据类型     | 描述        | 默认值 |
+  | -------- | -------- | --------- | --- |
+  | interval | float    | 定时器触发间隔时间 |     |
+  | function | function | 要执行的函数    |     |
+  | args     | tuple    | 函数的位置参数   | ()  |
+  | kwargs   | dict     | 函数的关键字参数  | {}  |
+
+- 返回值
+  
+  | 数据类型          | 描述      |
+  | ------------- | ------- |
+  | RepeatedTimer | 重复计时器实例 |
+
+- 示例
+  
+  ```python
+  # -*- coding: utf-8 -*-
+  from consoleLib.serverApi import AddRepeatedTimer
+  
+  def CallBack(*args, **kwargs):
+      print args, kwargs
+  
+  AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
+  ```
+
+#### 客户端接口
+
+method in consoleLib.time.client.timer
+
+- 描述
+  
+  添加重复定时器 使用Python标准库threading编写
+
+- 参数
+  
+  | 参数名      | 数据类型     | 描述        | 默认值 |
+  | -------- | -------- | --------- | --- |
+  | interval | float    | 定时器触发间隔时间 |     |
+  | function | function | 要执行的函数    |     |
+  | args     | tuple    | 函数的位置参数   | ()  |
+  | kwargs   | dict     | 函数的关键字参数  | {}  |
+
+- 返回值
+  
+  | 数据类型          | 描述      |
+  | ------------- | ------- |
+  | RepeatedTimer | 重复计时器实例 |
+
+- 示例
+  
+  ```python
+  # -*- coding: utf-8 -*-
+  from consoleLib.clientApi import AddRepeatedTimer
+  
+  def CallBack(*args, **kwargs):
+      print args, kwargs
+  
+  AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
+  ```
+
+### Start
+
+服务端 客户端
+
+#### 服务端接口
+
+method in consoleLib.time.server.timer.BaseTimer
+
+- 描述
+  
+  启动定时器
+
+- 参数
+  
+  无
+
+- 返回值
+  
+  返回自身
+
+- 示例
+  
+  ```python
+  # -*- coding: utf-8 -*-
+  timer = AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
+  ```
+
+#### 客户端接口
+
+method in consoleLib.time.client.timer.BaseTimer
+
+- 描述
+  
+  启动定时器
+
+- 参数
+  
+  无
+
+- 返回值
+  
+  返回自身
+
+- 示例
+  
+  ```python
+  # -*- coding: utf-8 -*-
+  timer = AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
+  ```
+
+### Pause
+
+服务端 客户端
+
+#### 服务端接口
+
+method in consoleLib.time.server.timer.BaseTimer
+
+- 描述
+  
+  暂停定时器 并在指定时间后自动恢复
+
+- 参数
+  
+  | 参数名        | 数据类型        | 描述                | 默认值  |
+  | ---------- | ----------- | ----------------- | ---- |
+  | resumeTime | float\|None | 指定暂停的时间 不传则不会自动恢复 | None |
+
+- 返回值
+  
+  无返回值
+
+- 示例
+  
+  ```python
+  # -*- coding: utf-8 -*-
+  
+  # 暂停5秒 并在5秒后自动恢复
+  timer.Pause(5)
+  
+  # 暂停5秒 但是提前被手动恢复
+  timer.Pause(5)
+  import time
+  time.sleep(2)
+  timer.Resume()
+  ```
+
+#### 客户端接口
+
+method in consoleLib.time.client.timer.BaseTimer
+
+- 描述
+  
+  暂停定时器 并在指定时间后自动恢复
+
+- 参数
+  
+  | 参数名        | 数据类型        | 描述                | 默认值  |
+  | ---------- | ----------- | ----------------- | ---- |
+  | resumeTime | float\|None | 指定暂停的时间 不传则不会自动恢复 | None |
+
+- 返回值
+  
+  无返回值
+
+- 示例
+  
+  ```python
+  # -*- coding: utf-8 -*-
+  
+  # 暂停5秒 但是提前被取消
+  timer.Pause(5)
+  import time
+  time.sleep(2)
+  timer.Cancel()
+  ```
+
+### Cancel
+
+服务端 客户端
+
+#### 服务端接口
+
+method in consoleLib.time.server.timer.BaseTimer
+
+- 描述
+  
+  取消定时器 此操作不可逆
+
+- 参数
+  
+  无
+
+- 返回值
+  
+  无返回值
+
+- 示例
+  
+  ```python
+  # -*- coding: utf-8 -*-
+  timer.Cancel()
+  ```
+
+#### 客户端接口
+
+method in consoleLib.time.client.timer.BaseTimer
+
+- 描述
+  
+  取消定时器 此操作不可逆
+
+- 参数
+  
+  无
+
+- 返回值
+  
+  无返回值
+
+- 示例
+  
+  ```python
+  # -*- coding: utf-8 -*-
+  timer.Cancel()
+  ```
+
 ### GetDay
 
 服务端 客户端
@@ -849,14 +1157,14 @@ method in consoleLib.position.common.getPos
 
 - 参数
   
-  | 参数名      | 数据类型 | 描述            | 默认值                          |
-  | -------- | ---- | ------------- | ---------------------------- |
-  | pid      | str  | 玩家ID       |                              |
+  | 参数名 | 数据类型 | 描述   | 默认值 |
+  | --- | ---- | ---- | --- |
+  | pid | str  | 玩家ID |     |
 
 - 返回值
   
-  | 数据类型 | 描述          |
-  | ---- | ----------- |
+  | 数据类型                        | 描述     |
+  | --------------------------- | ------ |
   | tuple\[float, float, float] | 玩家手的位置 |
 
 - 示例
@@ -894,10 +1202,10 @@ method in consoleLib.random.common.probability
   | bool | True表示事件发生 False表示不发生 |
 
 - 示例
-
+  
   ```python
   from consoleLib.commonApi import CanEventHappenByProbability
-
+  
   if CanEventHappenByProbability(85%):
     print 'consolelib'
   ```
