@@ -3,6 +3,8 @@
 ## 目录
 
 <!-- TOC -->
+
+<!-- TOC -->
 * [ConsoleLib文档](#consolelib文档)
   * [目录](#目录)
   * [constant](#constant)
@@ -31,32 +33,23 @@
     * [AddRepeatedTimer](#addrepeatedtimer)
       * [服务端接口](#服务端接口-2)
       * [客户端接口](#客户端接口-2)
-    * [Start](#start)
+    * [GetDay](#getday)
       * [服务端接口](#服务端接口-3)
       * [客户端接口](#客户端接口-3)
-    * [Pause](#pause)
+    * [GetTimeOfDay](#gettimeofday)
       * [服务端接口](#服务端接口-4)
       * [客户端接口](#客户端接口-4)
-    * [Cancel](#cancel)
-      * [服务端接口](#服务端接口-5)
-      * [客户端接口](#客户端接口-5)
-    * [GetDay](#getday)
-      * [服务端接口](#服务端接口-6)
-      * [客户端接口](#客户端接口-6)
-    * [GetTimeOfDay](#gettimeofday)
-      * [服务端接口](#服务端接口-7)
-      * [客户端接口](#客户端接口-7)
   * [position / 位置](#position--位置)
     * [GetEuclideanDistance](#geteuclideandistance)
     * [GetNearestEntity](#getnearestentity)
-      * [服务端接口](#服务端接口-8)
-      * [客户端接口](#客户端接口-8)
+      * [服务端接口](#服务端接口-5)
+      * [客户端接口](#客户端接口-5)
     * [GetNearestPlayer](#getnearestplayer)
-      * [服务端接口](#服务端接口-9)
-      * [客户端接口](#客户端接口-9)
+      * [服务端接口](#服务端接口-6)
+      * [客户端接口](#客户端接口-6)
     * [GetPosFromPlayerRot](#getposfromplayerrot)
-      * [服务端接口](#服务端接口-10)
-      * [客户端接口](#客户端接口-10)
+      * [服务端接口](#服务端接口-7)
+      * [客户端接口](#客户端接口-7)
     * [GetPlayerHandPos](#getplayerhandpos)
   * [random / 随机数](#random--随机数)
     * [CanEventHappenByProbability](#caneventhappenbyprobability)
@@ -484,6 +477,8 @@ method in consoleLib.playerId.client.isPlayerId
 
 ## time / 时间
 
+点击查看[计时器](timer.md)相关文档
+
 ### AddTimer
 
 服务端 客户端
@@ -507,9 +502,9 @@ method in consoleLib.time.server.timer
 
 - 返回值
   
-  | 数据类型         | 描述       |
-  | ------------ | -------- |
-  | OneShotTimer | 一次性计时器实例 |
+  | 数据类型         | 描述                   |
+  | ------------ |----------------------|
+  | OneShotTimer | 一次性[计时器](timer.md)实例 |
 
 - 示例
   
@@ -544,7 +539,7 @@ method in consoleLib.time.client.timer
   
   | 数据类型         | 描述       |
   | ------------ | -------- |
-  | OneShotTimer | 一次性计时器实例 |
+  | OneShotTimer | 一次性[计时器](timer.md)实例 |
 
 - 示例
   
@@ -583,7 +578,7 @@ method in consoleLib.time.server.timer
   
   | 数据类型          | 描述      |
   | ------------- | ------- |
-  | RepeatedTimer | 重复计时器实例 |
+  | RepeatedTimer | 重复[计时器](timer.md)实例 |
 
 - 示例
   
@@ -618,7 +613,7 @@ method in consoleLib.time.client.timer
   
   | 数据类型          | 描述      |
   | ------------- | ------- |
-  | RepeatedTimer | 重复计时器实例 |
+  | RepeatedTimer | 重复[计时器](timer.md)实例 |
 
 - 示例
   
@@ -630,173 +625,6 @@ method in consoleLib.time.client.timer
       print args, kwargs
   
   AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
-  ```
-
-### Start
-
-服务端 客户端
-
-#### 服务端接口
-
-method in consoleLib.time.server.timer.BaseTimer
-
-- 描述
-  
-  启动定时器
-
-- 参数
-  
-  无
-
-- 返回值
-  
-  返回自身
-
-- 示例
-  
-  ```python
-  # -*- coding: utf-8 -*-
-  timer = AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
-  ```
-
-#### 客户端接口
-
-method in consoleLib.time.client.timer.BaseTimer
-
-- 描述
-  
-  启动定时器
-
-- 参数
-  
-  无
-
-- 返回值
-  
-  返回自身
-
-- 示例
-  
-  ```python
-  # -*- coding: utf-8 -*-
-  timer = AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
-  ```
-
-### Pause
-
-服务端 客户端
-
-#### 服务端接口
-
-method in consoleLib.time.server.timer.BaseTimer
-
-- 描述
-  
-  暂停定时器 并在指定时间后自动恢复
-
-- 参数
-  
-  | 参数名        | 数据类型        | 描述                | 默认值  |
-  | ---------- | ----------- | ----------------- | ---- |
-  | resumeTime | float\|None | 指定暂停的时间 不传则不会自动恢复 | None |
-
-- 返回值
-  
-  无返回值
-
-- 示例
-  
-  ```python
-  # -*- coding: utf-8 -*-
-  
-  # 暂停5秒 并在5秒后自动恢复
-  timer.Pause(5)
-  
-  # 暂停5秒 但是提前被手动恢复
-  timer.Pause(5)
-  import time
-  time.sleep(2)
-  timer.Resume()
-  ```
-
-#### 客户端接口
-
-method in consoleLib.time.client.timer.BaseTimer
-
-- 描述
-  
-  暂停定时器 并在指定时间后自动恢复
-
-- 参数
-  
-  | 参数名        | 数据类型        | 描述                | 默认值  |
-  | ---------- | ----------- | ----------------- | ---- |
-  | resumeTime | float\|None | 指定暂停的时间 不传则不会自动恢复 | None |
-
-- 返回值
-  
-  无返回值
-
-- 示例
-  
-  ```python
-  # -*- coding: utf-8 -*-
-  
-  # 暂停5秒 但是提前被取消
-  timer.Pause(5)
-  import time
-  time.sleep(2)
-  timer.Cancel()
-  ```
-
-### Cancel
-
-服务端 客户端
-
-#### 服务端接口
-
-method in consoleLib.time.server.timer.BaseTimer
-
-- 描述
-  
-  取消定时器 此操作不可逆
-
-- 参数
-  
-  无
-
-- 返回值
-  
-  无返回值
-
-- 示例
-  
-  ```python
-  # -*- coding: utf-8 -*-
-  timer.Cancel()
-  ```
-
-#### 客户端接口
-
-method in consoleLib.time.client.timer.BaseTimer
-
-- 描述
-  
-  取消定时器 此操作不可逆
-
-- 参数
-  
-  无
-
-- 返回值
-  
-  无返回值
-
-- 示例
-  
-  ```python
-  # -*- coding: utf-8 -*-
-  timer.Cancel()
   ```
 
 ### GetDay
