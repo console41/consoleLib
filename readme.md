@@ -1033,8 +1033,9 @@ method in consoleLib.random.common.probability
   
   ```python
   from consoleLib.commonApi import CanEventHappenByProbability
-  
-  if CanEventHappenByProbability(85%):
+
+  # 切记不能用百分数 例如: 100%
+  if CanEventHappenByProbability(0.85):
     print 'consolelib'
   ```
 
