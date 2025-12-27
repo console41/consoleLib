@@ -7,27 +7,41 @@
 <!-- TOC -->
 
 * [ConsoleLib文档](#consolelib文档)
+  
   * [目录](#目录)
+  
   * [constant](#constant)
+  
   * [control / 控制](#control--控制)
+    
     * [FullScreenUI](#fullscreenui)
+  
   * [item / 物品](#item--物品)
+    
     * [CreateItemDict](#createitemdict)
     * [HaveItem](#haveitem)
+  
   * [message / 消息](#message--消息)
+    
     * [SendLocalMessage](#sendlocalmessage)
     * [SendGlobalMessage](#sendglobalmessage)
     * [SendMessageToPlayer](#sendmessagetoplayer)
+  
   * [title / 标题](#title--标题)
+    
     * [SetMiddleTitle](#setmiddletitle)
+  
   * [playerId / 玩家ID](#playerid--玩家id)
+    
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername)
     * [GetPlayerIdByPlayerUid](#getplayeridbyplayeruid)
     * [GetPlayerIdByDimensionId](#getplayeridbydimensionid)
     * [IsIdPlayerId](#isidplayerid)
       * [服务端接口](#服务端接口)
       * [客户端接口](#客户端接口)
+  
   * [time / 时间](#time--时间)
+    
     * [AddTimer](#addtimer)
       * [服务端接口](#服务端接口-1)
       * [客户端接口](#客户端接口-1)
@@ -40,7 +54,9 @@
     * [GetTimeOfDay](#gettimeofday)
       * [服务端接口](#服务端接口-4)
       * [客户端接口](#客户端接口-4)
+  
   * [position / 位置](#position--位置)
+    
     * [GetEuclideanDistance](#geteuclideandistance)
     * [GetNearestEntity](#getnearestentity)
       * [服务端接口](#服务端接口-5)
@@ -52,9 +68,13 @@
       * [服务端接口](#服务端接口-7)
       * [客户端接口](#客户端接口-7)
     * [GetPlayerHandPos](#getplayerhandpos)
+  
   * [random / 随机数](#random--随机数)
+    
     * [CanEventHappenByProbability](#caneventhappenbyprobability)
+  
   * [command / 指令](#command--指令)
+    
     * [IsRunByPlayer](#isrunbyplayer)
       
       <!-- TOC -->
@@ -979,7 +999,7 @@ method in consoleLib.position.client.getPos
 
 服务端 客户端
 
-method in consoleLib.position.common.getPos
+method in consoleLib.position.server.getPos
 
 - 描述
   
@@ -1002,7 +1022,7 @@ method in consoleLib.position.common.getPos
   ```python
   # --- coding: utf-8 ---
   from consoleLib.constant.serverConstant import *
-  from consoleLib.commonApi import GetPlayerHandPos
+  from consoleLib.serverApi import GetPlayerHandPos
   
   print GetPlayerHandPos(serverApi.GetPlayerList[0])
   ```
