@@ -5,6 +5,7 @@
 <!-- TOC -->
 
 <!-- TOC -->
+
 * [ConsoleLib文档](#consolelib文档)
   * [目录](#目录)
   * [constant](#constant)
@@ -55,7 +56,8 @@
     * [CanEventHappenByProbability](#caneventhappenbyprobability)
   * [command / 指令](#command--指令)
     * [IsRunByPlayer](#isrunbyplayer)
-<!-- TOC -->
+      
+      <!-- TOC -->
 
 ## constant
 
@@ -110,7 +112,7 @@ method in consoleLib.control.client.ui
 
 服务端 客户端
 
-method in consoleLib.item.itemDict
+method in consoleLib.item.common.itemDict
 
 - 描述
   
@@ -151,7 +153,7 @@ method in consoleLib.item.itemDict
 
 服务端
 
-method in consoleLib.item.haveItem
+method in consoleLib.item.server.haveItem
 
 - 描述
   
@@ -503,7 +505,7 @@ method in consoleLib.time.server.timer
 - 返回值
   
   | 数据类型         | 描述                   |
-  | ------------ |----------------------|
+  | ------------ | -------------------- |
   | OneShotTimer | 一次性[计时器](timer.md)实例 |
 
 - 示例
@@ -537,8 +539,8 @@ method in consoleLib.time.client.timer
 
 - 返回值
   
-  | 数据类型         | 描述       |
-  | ------------ | -------- |
+  | 数据类型         | 描述                   |
+  | ------------ | -------------------- |
   | OneShotTimer | 一次性[计时器](timer.md)实例 |
 
 - 示例
@@ -576,8 +578,8 @@ method in consoleLib.time.server.timer
 
 - 返回值
   
-  | 数据类型          | 描述      |
-  | ------------- | ------- |
+  | 数据类型          | 描述                  |
+  | ------------- | ------------------- |
   | RepeatedTimer | 重复[计时器](timer.md)实例 |
 
 - 示例
@@ -611,8 +613,8 @@ method in consoleLib.time.client.timer
 
 - 返回值
   
-  | 数据类型          | 描述      |
-  | ------------- | ------- |
+  | 数据类型          | 描述                  |
+  | ------------- | ------------------- |
   | RepeatedTimer | 重复[计时器](timer.md)实例 |
 
 - 示例
@@ -1033,7 +1035,7 @@ method in consoleLib.random.common.probability
   
   ```python
   from consoleLib.commonApi import CanEventHappenByProbability
-
+  
   # 切记不能用百分数 例如: 100%
   if CanEventHappenByProbability(0.85):
     print 'consolelib'
@@ -1053,9 +1055,9 @@ method in consoleLib.command.server.origin
 
 - 参数
   
-  | 参数名        | 数据类型 | 描述                                        | 默认值 |
-  | ---------- | ---- | ----------------------------------------- | --- |
-  | originArgs | dict | CustomCommandTriggerServerEvent事件触发后的原始数据 |     |
+  | 参数名  | 数据类型 | 描述                                        | 默认值 |
+  | ---- | ---- | ----------------------------------------- | --- |
+  | args | dict | CustomCommandTriggerServerEvent事件触发后的原始数据 |     |
 
 - 返回值
   
