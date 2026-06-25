@@ -4,8 +4,6 @@
 
 <!-- TOC -->
 
-<!-- TOC -->
-
 * [ConsoleLib文档](#consolelib文档)
   
   * [目录](#目录)
@@ -199,6 +197,30 @@ method in consoleLib.item.server.haveItem
   
   print HaveItem(serverApi.GetPlayerList()[0], 'minecraft:diamond')
   ```
+
+### GetItemByTag
+
+服务端 客户端
+
+#### 服务端接口
+
+method in consoleLib.item.server.itemInfo
+
+- 描述
+
+    根据物品标签获取物品
+
+- 参数
+
+  | 参数名 | 数据类型       | 描述        | 默认值 |
+  |-----|------------|-----------|-----|
+  | tag | tuple[str] | 物品标签 可为多个 |     |
+
+- 返回值
+
+    | 数据类型      | 描述                                       |
+    |-----------|------------------------------------------|
+    | list[str] | 带有该标签的物品标识符列表(若传了多个标签 物品需同时带有这几种标签才会匹配上) |
 
 ## message / 消息
 
