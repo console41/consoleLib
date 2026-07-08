@@ -167,6 +167,51 @@ method in consoleLib.item.common.itemDict
   # {'newAuxValue': 0, 'newItemName': 'console:item', 'count': 1}
   ```
 
+### CreateEnchantItemBypass
+
+服务端 客户端
+
+method in consoleLib.item.common.itemDict
+
+- 描述
+  
+  生成无视原版附魔等级和冲突限制的物品信息字典
+
+- 参数
+  
+  | 参数名         | 数据类型            | 描述                           | 默认值 |
+  |-------------|-----------------|------------------------------|-----|
+  | itemDict    | dict            | 原物品信息字典                      |     |
+  | enchantment | dict\[int, int] | 必附魔信息 key为附魔的数字ID value为附魔等级 |     |
+
+- 备注
+
+  - 仅支持原版附魔
+
+  - 附魔等级x: -32767 <= x <= 32767 x为整数
+
+ 返回值
+  
+  | 数据类型       | 描述 |
+  |------------|----|
+  | dict\[str] | 带有附魔信息的物品信息字典   |
+
+- 示例
+  
+  ```python
+  # --- coding: utf-8 ---
+  from consoleLib.constant.serverConstant import *
+  from consoleLib.commonApi import CreateItemDict, CreateEnchantItemBypass
+  
+  itemDict = CreateEnchantItemBypass(CreateItemDict('minecraft:mace'),
+                        {
+                            ENUM.EnchantType.WindBurst : 32767,
+                        }
+  )
+  pid = serverApi.GetPlayerList()[0]
+  ItemComp(pid).SpawnItemToPlayerInv(itemDict, pid)
+  ```
+
 ### HaveItem
 
 服务端

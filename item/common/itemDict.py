@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import copy
+
+
 def CreateItemDict(newItemName, newAuxValue=0, count=1, showInHand=True, enchantData=None, modEnchantData=None,
                    customTips='', extraId='', userData=None, durability=0, itemName='', auxValue=0):
     """
@@ -40,3 +43,34 @@ def CreateItemDict(newItemName, newAuxValue=0, count=1, showInHand=True, enchant
     if auxValue:
         result['auxValue'] = auxValue
     return result
+
+
+def CreateEnchantItemBypass(itemDict, enchantment):
+    """
+    生成无视原版附魔等级和冲突限制的物品信息字典
+    仅支持原版附魔 附魔等级x: -32767 <= x <= 32767 x为整数
+    :param itemDict: 原物品信息字典
+    :param enchantment: 附魔信息 key为附魔的数字ID value为附魔等级
+    :return: 带有附魔信息的物品信息字典
+    """
+    itemDict = copy.deepcopy(itemDict)
+    if 'enchantData' in itemDict:
+        del itemDict['enchantData']
+    if 'userData' not in itemDict or itemDict['userData'] is None:
+        itemDict['userData'] = {}
+    enchantments = itemDict['userData'].setdefault('ench', [])
+
+    for _id, level in enchantment.items():
+        safeLevel = max(-32767, min(32767, level))
+        # 遍历已有附魔匹配ID 存在则修改等级
+        for _enchantment in enchantments:
+            if _enchantment["id"]["__value__"] == _id:
+                _enchantment["lvl"]["__value__"] = safeLevel
+                break
+        else:
+            # 无匹配则新增附魔条目
+            enchantments.append({
+                'id': {'__type__': 2, '__value__': _id},
+                'lvl': {'__type__': 2, '__value__': safeLevel},
+            })
+    return itemDict
