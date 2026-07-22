@@ -180,21 +180,21 @@ method in consoleLib.item.common.itemDict
 - 参数
   
   | 参数名         | 数据类型            | 描述                           | 默认值 |
-  |-------------|-----------------|------------------------------|-----|
+  | ----------- | --------------- | ---------------------------- | --- |
   | itemDict    | dict            | 原物品信息字典                      |     |
   | enchantment | dict\[int, int] | 必附魔信息 key为附魔的数字ID value为附魔等级 |     |
 
 - 备注
-
-  - 仅支持原版附魔
-
-  - 附魔等级x: -32767 <= x <= 32767 x为整数
-
- 返回值
   
-  | 数据类型       | 描述 |
-  |------------|----|
-  | dict\[str] | 带有附魔信息的物品信息字典   |
+  - 仅支持原版附魔
+  
+  - 附魔等级x: -32767 <= x <= 32767 x为整数
+  
+  返回值
+  
+  | 数据类型       | 描述            |
+  | ---------- | ------------- |
+  | dict\[str] | 带有附魔信息的物品信息字典 |
 
 - 示例
   
@@ -252,20 +252,20 @@ method in consoleLib.item.server.haveItem
 method in consoleLib.item.server.itemInfo
 
 - 描述
-
+  
     根据物品标签获取物品
 
 - 参数
-
+  
   | 参数名 | 数据类型       | 描述        | 默认值 |
-  |-----|------------|-----------|-----|
+  | --- | ---------- | --------- | --- |
   | tag | tuple[str] | 物品标签 可为多个 |     |
 
 - 返回值
-
-    | 数据类型      | 描述                                       |
-    |-----------|------------------------------------------|
-    | list[str] | 带有该标签的物品标识符列表(若传了多个标签 物品需同时带有这几种标签才会匹配上) |
+  
+  | 数据类型      | 描述                                       |
+  | --------- | ---------------------------------------- |
+  | list[str] | 带有该标签的物品标识符列表(若传了多个标签 物品需同时带有这几种标签才会匹配上) |
 
 ## message / 消息
 
@@ -1161,4 +1161,31 @@ method in consoleLib.command.server.origin
   @Listen
   def CustomCommandTriggerServerEvent(self, args):
     print IsRunByPlayer(args)
+  ```
+
+## maths / 数学
+
+### AABB
+
+class in consoleLib.maths.common.aabb
+
+[AABB下的属性和方法](aabb.md)
+
+- 描述
+  
+  AABB包围盒
+
+- 参数
+  
+  | 参数名    | 数据类型                                      | 描述       | 默认值 |
+  | ------ | ----------------------------------------- | -------- | --- |
+  | point1 | tuple[int\|float, int\|float, int\|float] | 包围盒顶点坐标1 |     |
+  | point2 | tuple[int\|float, int\|float, int\|float] | 包围盒顶点坐标2 |     |
+
+- 示例
+  
+  ```python
+  from consoleLib.commonApi import AABB
+  
+  AABB((0, 0, 0), (0, 1, 1))
   ```
