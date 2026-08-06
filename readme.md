@@ -883,7 +883,7 @@ method in consoleLib.position.server.getEntities
   | 参数名          | 数据类型                         | 描述          | 默认值  |
   | ------------ | ---------------------------- | ----------- | ---- |
   | point        | tuple\[float, float, float\] | 坐标          |      |
-  | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
+  | exceptedList | list\[str\]                  | 需要排除的实体id列表 | \[\] |
 
 - 返回值
   
@@ -914,7 +914,7 @@ method in consoleLib.position.client.getEntities
   | 参数名          | 数据类型                         | 描述          | 默认值  |
   | ------------ | ---------------------------- | ----------- | ---- |
   | point        | tuple\[float, float, float\] | 坐标          |      |
-  | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
+  | exceptedList | list\[str\]                  | 需要排除的实体id列表 | \[\] |
 
 - 返回值
   
@@ -928,7 +928,7 @@ method in consoleLib.position.client.getEntities
   # --- coding: utf-8 ---
   from consoleLib.clientApi import GetNearestEntity
   
-  eid, distance GetNearestEntity((0, 0, 0))
+  eid, distance = GetNearestEntity((0, 0, 0))
   ```
 
 ### GetNearestPlayer
@@ -961,7 +961,7 @@ method in consoleLib.position.server.getEntities
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import GetNearestPlayer
   
-  pid, distance GetNearestPlayer(PosComp(serverApi.GetPlayerList()[0]).GetPos())
+  pid, distance = GetNearestPlayer(PosComp(serverApi.GetPlayerList()[0]).GetPos())
   ```
 
 #### 客户端接口
@@ -991,7 +991,7 @@ method in consoleLib.position.client.getEntities
   # --- coding: utf-8 ---
   from consoleLib.clientApi import GetNearestPlayer
   
-  pid, distance GetNearestPlayer((0, 0, 0))
+  pid, distance = GetNearestPlayer((0, 0, 0))
   ```
 
 ### GetPosFromPlayerRot
