@@ -22,7 +22,7 @@
     * [SetMiddleTitle](#setmiddletitle)
   * [playerId / 玩家ID](#playerid--玩家id)
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername)
-    * [GetPlayerIdByPlayerUid](#getplayeridbyplayeruid)
+    * [GetPlayerIdByUid](#getplayeridbyuid)
     * [GetPlayerIdByDimensionId](#getplayeridbydimensionid)
     * [IsIdPlayerId](#isidplayerid)
       * [服务端接口](#服务端接口-1)
@@ -46,10 +46,9 @@
       * [服务端接口](#服务端接口-6)
       * [客户端接口](#客户端接口-5)
     * [GetPlayerListSortedByDistance](#getplayerlistsortedbydistance)
-      * [客户端接口](#客户端接口-6)
     * [GetPosFromPlayerRot](#getposfromplayerrot)
       * [服务端接口](#服务端接口-7)
-      * [客户端接口](#客户端接口-7)
+      * [客户端接口](#客户端接口-6)
     * [GetPlayerHandPos](#getplayerhandpos)
   * [random / 随机数](#random--随机数)
     * [CanEventHappenByProbability](#caneventhappenbyprobability)
@@ -68,7 +67,7 @@ constant储存了组件工厂```clientApi.GetEngineCompFactory()```的组件 避
 示例:
 
 ```python
-# --- coding: utf-8 ---
+# -*- coding: utf-8 -*-
 from consoleLib.constant.serverConstant import *
 
 for pid in serverApi.GetPlayerList():
@@ -100,7 +99,7 @@ method in consoleLib.control.client.ui
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.clientApi import FullScreenUI
   
   FullScreenUI(True)
@@ -137,12 +136,14 @@ method in consoleLib.item.common.itemDict
 
 - 返回值
   
-  无
+  | 数据类型       | 描述            |
+  | ------- | ------------- |
+  | dict | 构造好的物品信息字典 |
 
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.commonApi import CreateItemDict
   
   print CreateItemDict('console:item')
@@ -181,7 +182,7 @@ method in consoleLib.item.common.itemDict
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.serverConstant import *
   from consoleLib.commonApi import CreateItemDict, CreateEnchantItemBypass
   
@@ -211,14 +212,17 @@ method in consoleLib.item.server.haveItem
   | pid      | str  | 玩家ID  |     |
   | itemName | str  | 物品标识符 |     |
 
-- 返回值
+ 返回值
   
-  无
+  | 数据类型 | 描述      |
+  |------|---------|
+  | bool | 是否有指定物品 |
+
 
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import HaveItem
   
@@ -278,10 +282,10 @@ method in consoleLib.message.client.leftCornerNotify
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.clientApi import SendLocalMessage
   
-  SendGlobalMessage('游戏即将开始', header='系统>>')
+  SendLocalMessage('游戏即将开始', header='系统>>')
   # 结果: 系统>>游戏即将开始
   ```
 
@@ -312,7 +316,7 @@ method in consoleLib.message.server.leftCornerNotify
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import SendGlobalMessage
   
@@ -345,7 +349,7 @@ method in consoleLib.message.server.leftCornerNotify
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import SendMessageToPlayer
   
@@ -384,7 +388,7 @@ method in consoleLib.message.server.title
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import SetMiddleTitle
   
@@ -418,13 +422,13 @@ method in consoleLib.playerId.server.getPlayerId
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.serverApi import GetPlayerIdByPlayerName
   
   print GetPlayerIdByPlayerName('Console')
   ```
 
-### GetPlayerIdByPlayerUid
+### GetPlayerIdByUid
 
 服务端
 
@@ -449,7 +453,7 @@ method in consoleLib.playerId.server.getPlayerId
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.serverApi import GetPlayerIdByUid
   
   print GetPlayerIdByUid(-12345678987654321)
@@ -480,10 +484,10 @@ method in consoleLib.playerId.server.getPlayerId
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
-  from consoleLib.serverApi import GetPlayerIdByUid
+  # -*- coding: utf-8 -*-
+  from consoleLib.serverApi import GetPlayerIdByDimensionId
   
-  print GetPlayerIdByUid(-12345678987654321)
+  print GetPlayerIdByDimensionId(0)
   ```
 
 ### IsIdPlayerId
@@ -511,10 +515,10 @@ method in consoleLib.playerId.server.isPlayerId
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.serverApi import IsIdPlayerId
   
-  print IsPlayerId(6666666666666)
+  print IsIdPlayerId(6666666666666)
   ```
 
 #### 客户端接口
@@ -540,10 +544,10 @@ method in consoleLib.playerId.client.isPlayerId
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.clientApi import IsIdPlayerId
   
-  print IsPlayerId(6666666666666)
+  print IsIdPlayerId(6666666666666)
   ```
 
 ## time / 时间
@@ -660,7 +664,7 @@ method in consoleLib.time.server.timer
   def CallBack(*args, **kwargs):
       print args, kwargs
   
-  AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
+  AddRepeatedTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
   ```
 
 #### 客户端接口
@@ -695,7 +699,7 @@ method in consoleLib.time.client.timer
   def CallBack(*args, **kwargs):
       print args, kwargs
   
-  AddTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
+  AddRepeatedTimer(1.0, CallBack, (1, 2, 3), {'playerId': -1}).Start()
   ```
 
 ### GetDay
@@ -725,7 +729,7 @@ method in consoleLib.time.server.gameTime
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.serverApi import GetDay
   
   print GetDay(24000)  # 结果: 1 (表示经过了1天)
@@ -754,7 +758,7 @@ method in consoleLib.time.client.gameTime
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.clientApi import GetDay
   
   print GetDay()  # 结果: 游戏实际天数
@@ -787,7 +791,7 @@ method in consoleLib.time.server.gameTime
 - 示例
 
 ```python
-# --- coding: utf-8 ---
+# -*- coding: utf-8 -*-
 from consoleLib.serverApi import GetTimeOfDay
 
 print GetTimeOfDay()
@@ -816,7 +820,7 @@ method in consoleLib.time.client.gameTime
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.clientApi import GetTimeOfDay
   
   print GetTimeOfDay()
@@ -844,7 +848,7 @@ method in consoleLib.position.common.getDistance
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.commonApi import GetEuclideanDistance
   
   GetEuclideanDistance((0, 0, 0), (1, 1, 1))
@@ -863,10 +867,10 @@ method in consoleLib.position.server.getEntities
 - 参数
   
   | 参数名          | 数据类型                         | 描述          | 默认值  |
-  |--------------|------------------------------|-------------| ---- |
+  |--------------|------------------------------|-------------|------|
   | dimensionId  | int                          | 维度ID        |      |
   | point        | tuple\[float, float, float\] | 坐标          |      |
-  | exceptedList | list\[str\]                  | 需要排除的实体id列表 | \[\] |
+  | exceptedList | list\[str\]                  | 需要排除的实体id列表 | None |
 
 - 返回值
   
@@ -877,7 +881,7 @@ method in consoleLib.position.server.getEntities
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import GetEntityListSortedByDistance
   
@@ -896,9 +900,9 @@ method in consoleLib.position.client.getEntities
 - 参数
   
   | 参数名          | 数据类型                         | 描述          | 默认值  |
-  |--------------|------------------------------|-------------| ---- |
+  |--------------|------------------------------|-------------|------|
   | point        | tuple\[float, float, float\] | 坐标          |      |
-  | exceptedList | list\[str\]                  | 需要排除的实体id列表 | \[\] |
+  | exceptedList | list\[str\]                  | 需要排除的实体id列表 | None |
 
 - 备注
 
@@ -913,7 +917,7 @@ method in consoleLib.position.client.getEntities
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.clientConstant import *
   from consoleLib.serverApi import GetEntityListSortedByDistance
   
@@ -935,10 +939,10 @@ method in consoleLib.position.server.getEntities
 - 参数
   
   | 参数名          | 数据类型                         | 描述          | 默认值  |
-  | ------------ | ---------------------------- | ----------- | ---- |
+  | ------------ | ---------------------------- | ----------- |------|
   | dimensionId  | int                          | 维度ID        |      |
   | point        | tuple\[float, float, float\] | 坐标          |      |
-  | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
+  | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | None |
 
 - 返回值
   
@@ -949,12 +953,12 @@ method in consoleLib.position.server.getEntities
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import GetPlayerListSortedByDistance
   
   # 获取离某个玩家最远的另一个玩家的距离信息
-  pid, distance = GetPlayerListSortedByDistance(PosComp(serverApi.GetPlayerList()[0]).GetPos())[-1]
+  pid, distance = GetPlayerListSortedByDistance(0, PosComp(serverApi.GetPlayerList()[0]).GetPos())[-1]
   ```
 
 ### GetPosFromPlayerRot
@@ -986,7 +990,7 @@ method in consoleLib.position.server.getPos
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import GetPosFromPlayerRot
   
@@ -1018,7 +1022,7 @@ method in consoleLib.position.client.getPos
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.clientConstant import *
   from consoleLib.clientApi import GetPosFromPlayerRot
   
@@ -1050,11 +1054,11 @@ method in consoleLib.position.server.getPos
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.constant.serverConstant import *
   from consoleLib.serverApi import GetPlayerHandPos
   
-  print GetPlayerHandPos(serverApi.GetPlayerList[0])
+  print GetPlayerHandPos(serverApi.GetPlayerList()[0])
   ```
 
 ## random / 随机数
@@ -1084,6 +1088,7 @@ method in consoleLib.random.common.probability
 - 示例
   
   ```python
+  # -*- coding: utf-8 -*-
   from consoleLib.commonApi import CanEventHappenByProbability
   
   # 切记不能用百分数 例如: 100%
@@ -1118,7 +1123,7 @@ method in consoleLib.command.server.origin
 - 示例
   
   ```python
-  # --- coding: utf-8 ---
+  # -*- coding: utf-8 -*-
   from consoleLib.serverApi import IsRunByPlayer
   
   @Listen
