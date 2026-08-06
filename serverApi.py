@@ -7,7 +7,7 @@ from .message.server.leftCornerNotify import SendGlobalMessage, SendMessageToPla
 from .playerId.server.isPlayerId import IsIdPlayerId
 from .playerId.server.getPlayerId import GetPlayerIdByPlayerName, GetPlayerIdByUid, GetPlayerIdByDimensionId
 from .position.server.getPos import GetPosFromPlayerRot, GetPlayerHandPos
-from .position.server.getEntities import GetNearestEntity, GetNearestPlayer
+from .position.server.getEntities import GetEntityListSortedByDistance, GetPlayerListSortedByDistance
 from .time.server.gameTime import GetTimeOfDay, GetDay
 from .time.server.timer import AddTimer, AddRepeatedTimer
 from .command.server.origin import IsRunByPlayer

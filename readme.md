@@ -3,79 +3,61 @@
 ## 目录
 
 <!-- TOC -->
-
 * [ConsoleLib文档](#consolelib文档)
-  
   * [目录](#目录)
-  
   * [constant](#constant)
-  
   * [control / 控制](#control--控制)
-    
     * [FullScreenUI](#fullscreenui)
-  
   * [item / 物品](#item--物品)
-    
     * [CreateItemDict](#createitemdict)
+    * [CreateEnchantItemBypass](#createenchantitembypass)
     * [HaveItem](#haveitem)
-  
+    * [GetItemByTag](#getitembytag)
+      * [服务端接口](#服务端接口)
   * [message / 消息](#message--消息)
-    
     * [SendLocalMessage](#sendlocalmessage)
     * [SendGlobalMessage](#sendglobalmessage)
     * [SendMessageToPlayer](#sendmessagetoplayer)
-  
   * [title / 标题](#title--标题)
-    
     * [SetMiddleTitle](#setmiddletitle)
-  
   * [playerId / 玩家ID](#playerid--玩家id)
-    
     * [GetPlayerIdByPlayerName](#getplayeridbyplayername)
     * [GetPlayerIdByPlayerUid](#getplayeridbyplayeruid)
     * [GetPlayerIdByDimensionId](#getplayeridbydimensionid)
     * [IsIdPlayerId](#isidplayerid)
-      * [服务端接口](#服务端接口)
-      * [客户端接口](#客户端接口)
-  
-  * [time / 时间](#time--时间)
-    
-    * [AddTimer](#addtimer)
       * [服务端接口](#服务端接口-1)
+      * [客户端接口](#客户端接口)
+  * [time / 时间](#time--时间)
+    * [AddTimer](#addtimer)
+      * [服务端接口](#服务端接口-2)
       * [客户端接口](#客户端接口-1)
     * [AddRepeatedTimer](#addrepeatedtimer)
-      * [服务端接口](#服务端接口-2)
+      * [服务端接口](#服务端接口-3)
       * [客户端接口](#客户端接口-2)
     * [GetDay](#getday)
-      * [服务端接口](#服务端接口-3)
+      * [服务端接口](#服务端接口-4)
       * [客户端接口](#客户端接口-3)
     * [GetTimeOfDay](#gettimeofday)
-      * [服务端接口](#服务端接口-4)
-      * [客户端接口](#客户端接口-4)
-  
-  * [position / 位置](#position--位置)
-    
-    * [GetEuclideanDistance](#geteuclideandistance)
-    * [GetNearestEntity](#getnearestentity)
       * [服务端接口](#服务端接口-5)
-      * [客户端接口](#客户端接口-5)
-    * [GetNearestPlayer](#getnearestplayer)
+      * [客户端接口](#客户端接口-4)
+  * [position / 位置](#position--位置)
+    * [GetEuclideanDistance](#geteuclideandistance)
+    * [GetEntityListSortedByDistance](#getentitylistsortedbydistance)
       * [服务端接口](#服务端接口-6)
+      * [客户端接口](#客户端接口-5)
+    * [GetPlayerListSortedByDistance](#getplayerlistsortedbydistance)
       * [客户端接口](#客户端接口-6)
     * [GetPosFromPlayerRot](#getposfromplayerrot)
       * [服务端接口](#服务端接口-7)
       * [客户端接口](#客户端接口-7)
     * [GetPlayerHandPos](#getplayerhandpos)
-  
   * [random / 随机数](#random--随机数)
-    
     * [CanEventHappenByProbability](#caneventhappenbyprobability)
-  
   * [command / 指令](#command--指令)
-    
     * [IsRunByPlayer](#isrunbyplayer)
-      
-      <!-- TOC -->
+  * [maths / 数学](#maths--数学)
+    * [AABB](#aabb)
+<!-- TOC -->
 
 ## constant
 
@@ -868,7 +850,7 @@ method in consoleLib.position.common.getDistance
   GetEuclideanDistance((0, 0, 0), (1, 1, 1))
   ```
 
-### GetNearestEntity
+### GetEntityListSortedByDistance
 
 #### 服务端接口
 
@@ -876,29 +858,31 @@ method in consoleLib.position.server.getEntities
 
 - 描述
   
-  获取离当前一点最近的实体
+  按离某点的距离由近到远排序指定维度内的实体ID 并获取距离
 
 - 参数
   
   | 参数名          | 数据类型                         | 描述          | 默认值  |
-  | ------------ | ---------------------------- | ----------- | ---- |
+  |--------------|------------------------------|-------------| ---- |
+  | dimensionId  | int                          | 维度ID        |      |
   | point        | tuple\[float, float, float\] | 坐标          |      |
   | exceptedList | list\[str\]                  | 需要排除的实体id列表 | \[\] |
 
 - 返回值
   
-  | 数据类型                        | 描述        |
-  | --------------------------- | --------- |
-  | tuple\[list\[str\], float\] | 实体id列表和距离 |
+  | 数据类型                            | 描述        |
+  |---------------------------------| --------- |
+  | list\[tuple\[str, float\], ...] | 包含元组的列表 元组的第1个元素为实体ID 第2个元素为距离 |
 
 - 示例
   
   ```python
   # --- coding: utf-8 ---
   from consoleLib.constant.serverConstant import *
-  from consoleLib.serverApi import GetNearestEntity
+  from consoleLib.serverApi import GetEntityListSortedByDistance
   
-  eid, distance = GetNearestEntity(PosComp(serverApi.GetPlayerList()[0]).GetPos())
+  # 获取最近的实体ID和距离
+  eid, distance = GetEntityListSortedByDistance(0, PosComp(serverApi.GetPlayerList()[0]).GetPos())[0]
   ```
 
 #### 客户端接口
@@ -907,91 +891,70 @@ method in consoleLib.position.client.getEntities
 
 - 描述
   
-  获取离当前一点最近的实体
+  按离某点的距离由近到远排序指定维度内的实体ID 并获取距离
 
 - 参数
   
   | 参数名          | 数据类型                         | 描述          | 默认值  |
-  | ------------ | ---------------------------- | ----------- | ---- |
+  |--------------|------------------------------|-------------| ---- |
   | point        | tuple\[float, float, float\] | 坐标          |      |
   | exceptedList | list\[str\]                  | 需要排除的实体id列表 | \[\] |
 
+- 备注
+
+  仅能获取本地玩家所在维度内的实体距离信息
+
 - 返回值
   
-  | 数据类型                        | 描述        |
-  | --------------------------- | --------- |
-  | tuple\[list\[str\], float\] | 实体id列表和距离 |
+  | 数据类型                            | 描述        |
+  |---------------------------------| --------- |
+  | list\[tuple\[str, float\], ...] | 包含元组的列表 元组的第1个元素为实体ID 第2个元素为距离 |
 
 - 示例
   
   ```python
   # --- coding: utf-8 ---
-  from consoleLib.clientApi import GetNearestEntity
+  from consoleLib.constant.clientConstant import *
+  from consoleLib.serverApi import GetEntityListSortedByDistance
   
-  eid, distance = GetNearestEntity((0, 0, 0))
+  # 获取最近的实体ID和距离
+  eid, distance = GetEntityListSortedByDistance(PosComp(clientApi.GetPlayerList()[0]).GetPos())[0]
   ```
 
-### GetNearestPlayer
 
-#### 服务端接口
+### GetPlayerListSortedByDistance
+
+服务端
 
 method in consoleLib.position.server.getEntities
 
 - 描述
   
-  获取离当前一点最近的玩家
+  按离某点的距离由近到远排序指定维度内的玩家ID 并获取距离
 
 - 参数
   
   | 参数名          | 数据类型                         | 描述          | 默认值  |
   | ------------ | ---------------------------- | ----------- | ---- |
+  | dimensionId  | int                          | 维度ID        |      |
   | point        | tuple\[float, float, float\] | 坐标          |      |
   | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
 
 - 返回值
   
-  | 数据类型                        | 描述        |
-  | --------------------------- | --------- |
-  | tuple\[list\[str\], float\] | 玩家id列表和距离 |
+  | 数据类型                            | 描述                             |
+  |---------------------------------|--------------------------------|
+  | list\[tuple\[str, float\], ...] | 包含元组的列表 元组的第1个元素为玩家ID 第2个元素为距离 |
 
 - 示例
   
   ```python
   # --- coding: utf-8 ---
   from consoleLib.constant.serverConstant import *
-  from consoleLib.serverApi import GetNearestPlayer
+  from consoleLib.serverApi import GetPlayerListSortedByDistance
   
-  pid, distance = GetNearestPlayer(PosComp(serverApi.GetPlayerList()[0]).GetPos())
-  ```
-
-#### 客户端接口
-
-method in consoleLib.position.client.getEntities
-
-- 描述
-  
-  获取离当前一点最近的玩家
-
-- 参数
-  
-  | 参数名          | 数据类型                         | 描述          | 默认值  |
-  | ------------ | ---------------------------- | ----------- | ---- |
-  | point        | tuple\[float, float, float\] | 坐标          |      |
-  | exceptedList | list\[str\]                  | 需要排除的玩家id列表 | \[\] |
-
-- 返回值
-  
-  | 数据类型                        | 描述        |
-  | --------------------------- | --------- |
-  | tuple\[list\[str\], float\] | 玩家id列表和距离 |
-
-- 示例
-  
-  ```python
-  # --- coding: utf-8 ---
-  from consoleLib.clientApi import GetNearestPlayer
-  
-  pid, distance = GetNearestPlayer((0, 0, 0))
+  # 获取离某个玩家最远的另一个玩家的距离信息
+  pid, distance = GetPlayerListSortedByDistance(PosComp(serverApi.GetPlayerList()[0]).GetPos())[-1]
   ```
 
 ### GetPosFromPlayerRot

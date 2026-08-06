@@ -15,5 +15,6 @@ OperationComp = COMPONENT_FACTORY.CreateOperation(LEVEL_ID)
 EngineTypeComp = COMPONENT_FACTORY.CreateEngineType
 PosComp = COMPONENT_FACTORY.CreatePos(PLAYER_ID)
 RotComp = COMPONENT_FACTORY.CreateRot(PLAYER_ID)
+DimensionComp = COMPONENT_FACTORY.CreateDimension(LEVEL_ID)
 
 ENUM = clientApi.GetMinecraftEnum()

@@ -3,41 +3,47 @@ from ..common.getDistance import GetEuclideanDistance
 from ...constant.serverConstant import *
 
 
-def GetNearestEntity(point, exceptedList=[]):
+def GetEntityListSortedByDistance(dimensionId, pos, exceptedList=None):
     """
-    获取离当前一点最近的实体
-    :param point:坐标
-    :param exceptedList: 需要排除的实体id列表
-    :return: 元组 第 1 个元素为玩家id列表 第 2 个元素为距离
+    按离某点的距离由近到远排序指定维度内的实体ID 并获取距离
+    :param dimensionId: 维度ID
+    :param pos: 坐标
+    :param exceptedList: 需要排除的实体ID列表
+    :return: 包含元组的列表 元组的第1个元素为实体ID 第2个元素为距离
     """
+    result = []
+    if exceptedList is None:
+        exceptedList = []
     entities = serverApi.GetEngineActor().keys()
     for i in exceptedList:
         entities.remove(i)
-    entityDistances = {
-        eid: GetEuclideanDistance(point, PosComp(eid).GetPos())
-        for eid in entities
-    }
-    if not entityDistances:
-        return {}
-    minDistance = min(entityDistances.values())
-    return [eid for eid, distance in entityDistances.items() if distance == minDistance], minDistance
+    for eid in entities:
+        entityDimensionId = DimensionComp(eid).GetEntityDimensionId()
+        if entityDimensionId == dimensionId:
+            distance = GetEuclideanDistance(PosComp(eid).GetPos(), pos)
+            result.append((eid, distance))
+    result.sort(key=lambda x: x[1])
+    return result
 
-
-def GetNearestPlayer(point, exceptedList=[]):
+def GetPlayerListSortedByDistance(dimensionId, pos, exceptedList=None):
     """
-    获取离当前一点最近的玩家
-    :param point:坐标
-    :param exceptedList: 需要排除的玩家id列表
-    :return: 元组 第 1 个元素为玩家id列表 第 2 个元素为距离
+    按离某点的距离由近到远排序指定维度内的玩家ID 并获取距离
+    :param dimensionId: 维度ID
+    :param pos: 坐标
+    :param exceptedList: 需要排除的玩家ID列表
+    :return: 包含元组的列表 元组的第1个元素为玩家ID 第2个元素为距离
     """
+    result = []
+    if exceptedList is None:
+        exceptedList = []
     players = serverApi.GetPlayerList()
     for i in exceptedList:
         players.remove(i)
-    playerDistances = {
-        eid: GetEuclideanDistance(point, PosComp(eid).GetPos())
-        for eid in players
-    }
-    if not playerDistances:
-        return {}
-    minDistance = min(playerDistances.values())
-    return [pid for pid, distance in playerDistances.items() if distance == minDistance], minDistance
+    for pid in players:
+        playerDimensionId = DimensionComp(pid).GetEntityDimensionId()
+        if playerDimensionId == dimensionId:
+            distance = GetEuclideanDistance(PosComp(pid).GetPos(), pos)
+            result.append((pid, distance))
+    result.sort(key=lambda x: x[1])
+    return result
+
