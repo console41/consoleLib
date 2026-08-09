@@ -2,7 +2,7 @@
 
 from .control.client.ui import FullScreenUI
 from .position.client.getPos import GetPosFromPlayerRot
-from .position.client.getEntities import GetNearestEntity, GetNearestPlayer
+from .position.client.getEntities import GetEntityListSortedByDistance
 from .time.client.gameTime import GetTimeOfDay, GetDay
 from .time.client.timer import AddTimer, AddRepeatedTimer
 from .playerId.client.isPlayerId import IsIdPlayerId
