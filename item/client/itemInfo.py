@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from ...constant.clientConstant import *
+from ...constant.serverConstant import *
 
 
 def GetItemByTag(*tag):
@@ -10,9 +10,10 @@ def GetItemByTag(*tag):
     :return: 带有该标签的物品标识符列表(若传了多个标签 物品需同时带有这几种标签才会匹配上)
     """
     result = []
-    allItems = ItemComp.GetLoadItems()
+    itemComp = ItemComp(LEVEL_ID)
+    allItems = itemComp.GetLoadItems()
     for itemName in allItems:
-        itemTags = ItemComp.GetItemTags(itemName)
+        itemTags = itemComp.GetItemTags(itemName)
         if all(t in itemTags for t in tag):
             result.append(itemName)
     return result
